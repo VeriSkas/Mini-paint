@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+
 import { Auth } from './containers/Auth/Auth';
 import { Content } from './containers/Content/Content';
+import { Editor } from './containers/Editor/Editor';
 import { MainPage } from './containers/MainPage/MainPage';
 import { SignUp } from './containers/SignUp/SignUp';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const protectedRoutes = (
     <Route path="/" element={<MainPage />}>
       <Route index element={<Content />} />
+      <Route path="editor" element={<Editor />} />
     </Route>
   );
   const unProtectedRoutes = (
@@ -20,10 +23,6 @@ function App() {
   );
   return (
     <div className="App">
-      <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
-        {isLoggedIn ? 'Log out' : 'Log in'}
-      </button>
-      <p>{isLoggedIn}</p>
       <Routes>
         {isLoggedIn ? protectedRoutes : unProtectedRoutes}
         <Route

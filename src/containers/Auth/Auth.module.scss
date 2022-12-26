@@ -1,3 +1,43 @@
+@import '../../shared/styles/color.scss';
+
 .Auth {
-  color: Blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../../shared/img/background7.png');
+  background-size: cover;
+  background-color: $lightColor;
+  background-repeat: no-repeat;
+  background-position: center;
+
+
+  .AuthContainer {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
+  }
+
+  h1 {
+    color: $lightColor;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px $shadowColor;
+  }
+
+  .AuthForm {
+    background: $lightGrey;
+    opacity: .8;
+    box-shadow: 2px 2px 2px $shadowColor;
+    padding: 15px;
+    border-radius: 5px;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .AuthFormBtns {
+      text-align: center;
+    }
+  }
 }

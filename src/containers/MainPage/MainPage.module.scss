@@ -1,3 +1,14 @@
+@import '../../shared/styles/color.scss';
+
 .MainPage {
-  color: Blue;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../../shared/img/background8.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: $lightColor;
+  background-position: center;
 }

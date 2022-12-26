@@ -19,6 +19,7 @@
     "no-console": "off",
     "react/jsx-uses-vars": "error",
     "react/jsx-uses-react": "error",
+    "no-unused-vars": "off",
     "no-restricted-syntax": [
       "error",
       {
