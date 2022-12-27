@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Select } from '../../components/UI/Select/Select';
-import { InputLabels } from '../../shared/text/text';
+import { InputLabels, TitleText } from '../../shared/text/text';
 import { ImageBoard } from '../ImageBoard/ImageBoard';
 import classes from './Content.module.scss';
 
@@ -32,21 +32,19 @@ export const Content = () => {
   };
 
   return (
-    <div className={classes.Content}>
-      <div className={classes.ContentContainer}>
-        <h1 className={classes.Title}>Images</h1>
-        <div className={classes.ContentBody}>
-          <Select
-            value={activeUserName}
-            labelText={InputLabels.select}
-            options={users.length ? users : []}
-            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-              onChangeHandler(event)
-            }
-          />
-          <ImageBoard />
-        </div>
+    <>
+      <h1 className={classes.Title}>{TitleText.images}</h1>
+      <div className={classes.ContentBody}>
+        <Select
+          value={activeUserName}
+          labelText={InputLabels.select}
+          options={users.length ? users : []}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+            onChangeHandler(event)
+          }
+        />
+        <ImageBoard />
       </div>
-    </div>
+    </>
   );
 };

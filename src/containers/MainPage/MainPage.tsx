@@ -7,7 +7,11 @@ export const MainPage = () => {
   return (
     <div className={classes.MainPage}>
       <NavBar />
-      <Outlet />
+      <div className={classes.Content}>
+        <div className={classes.ContentContainer}>
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };

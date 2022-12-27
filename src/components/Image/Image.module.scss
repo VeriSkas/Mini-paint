@@ -1,0 +1,15 @@
+.Image {
+  border-radius: 5px;
+  background: rgba(137, 137, 137, 0.7019607843);
+  padding: 10px;
+  margin: 0 10px 10px 0;
+
+  .ImageContainer {
+    .ImageContent {
+      width: 140px;
+      height: 210px;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}

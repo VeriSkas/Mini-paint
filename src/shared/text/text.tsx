@@ -11,6 +11,8 @@ export const TitleText = {
   logoTitle: 'Mini-paint',
   auth: 'Authorization',
   signUp: 'Sign up',
+  images: 'Images',
+  editor: 'Editor',
 };
 
 export const ErrorMessages = {

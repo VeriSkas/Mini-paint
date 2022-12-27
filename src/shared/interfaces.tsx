@@ -52,3 +52,14 @@ export interface ValidationType {
   maxLength?: number;
   isEqual?: boolean;
 }
+
+export interface Tools {
+  [tool: string]: {
+    path: string,
+  };
+}
+
+export interface MousePosition {
+  x: number;
+  y: number;
+}
