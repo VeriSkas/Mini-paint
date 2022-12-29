@@ -1,10 +1,15 @@
 import { NavLink } from 'react-router-dom';
 
+import { logOutHandler } from '../../../api/apiHandlers/authHandler';
 import { ButtonTypes, LinkText, TitleText } from '../../../shared/text/text';
 import { Button } from '../Button/Button';
 import classes from './NavBar.module.scss';
 
 export const NavBar = () => {
+  const logOut = () => {
+    logOutHandler();
+  };
+
   return (
     <div className={classes.NavBar}>
       <div className={classes.NavBarContainer}>
@@ -29,7 +34,9 @@ export const NavBar = () => {
           </div>
         </div>
         <div className={classes.Logout}>
-          <Button type={ButtonTypes.standard}>{LinkText.logOut}</Button>
+          <Button type={ButtonTypes.standard} onClick={logOut}>
+            {LinkText.logOut}
+          </Button>
         </div>
       </div>
     </div>

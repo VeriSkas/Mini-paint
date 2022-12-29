@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { signUpHandler } from '../../api/apiHandlers/signUpHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { FormControl, FormControlsSignUp } from '../../shared/interfaces';
@@ -55,7 +56,10 @@ export const SignUp = () => {
   };
 
   const registrHandler = () => {
-    
+    const userEmail = formControls.email.value;
+    const userPassword = formControls.password.value;
+
+    signUpHandler(userEmail, userPassword)
   }
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>, controlName: string) => {

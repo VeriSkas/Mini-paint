@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { authHandler } from '../../api/apiHandlers/authHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { FormControl, FormControlsAuth } from '../../shared/interfaces';
-import { ButtonTypes, ErrorMessages, InputLabels, InputTypes, LinkText, TitleText } from '../../shared/text/text';
+import {
+  ButtonTypes,
+  ErrorMessages,
+  InputLabels,
+  InputTypes,
+  LinkText,
+  TitleText
+} from '../../shared/text/text';
 import { validateControl } from '../../shared/validation';
 import classes from './Auth.module.scss';
 
@@ -61,7 +69,10 @@ export const Auth = () => {
   };
 
   const loginHandler = () => {
+    const userEmail = formControls.email.value;
+    const userPassword = formControls.password.value;
 
+    authHandler(userEmail, userPassword);
   }
 
   const renderInputs = () => {

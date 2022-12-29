@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+
+import { auth } from './api/apiConfig';
 
 import { Auth } from './containers/Auth/Auth';
 import { Content } from './containers/Content/Content';
@@ -8,7 +11,7 @@ import { MainPage } from './containers/MainPage/MainPage';
 import { SignUp } from './containers/SignUp/SignUp';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const protectedRoutes = (
     <Route path="/" element={<MainPage />}>
       <Route index element={<Content />} />
@@ -21,6 +24,18 @@ function App() {
       <Route path="/sign-up" element={<SignUp />} />
     </>
   );
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+  }, [isLoggedIn]);
+
   return (
     <div className="App">
       <Routes>
