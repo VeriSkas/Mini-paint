@@ -1,3 +1,5 @@
+@import '../../shared/styles/color.scss';
+
 .EditorTools {
   border-radius: 5px;
   background: #898989b3;
@@ -7,4 +9,28 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+
+  .ColorInput {
+    width: 45px;
+    height: 45px;
+    padding: 5px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    margin: 5px;
+    background: #b3b3b3;
+
+    &:hover {
+      box-shadow: 2px 2px 2px $shadowColor;
+    }
+
+    &:active {
+      box-shadow: inset 2px 2px 2px $shadowColor;
+    }
+
+    input {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
 }

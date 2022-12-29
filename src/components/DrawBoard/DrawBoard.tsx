@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+
+import { canvasSize } from '../../shared/constants';
 import { MousePosition } from '../../shared/interfaces';
 
 import classes from './DrawBoard.module.scss';
@@ -9,20 +11,26 @@ export const DrawBoard = (props: any) => {
     null
   );
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
   const draw = props.draw;
-  let context;
+  const mouseDownProp = props.mouseDown;
+  const mouseUpProp = props.mouseUp;
 
   useEffect(() => {
     const canvas = canvasRef.current;
 
     if (canvas == null) return;
 
-    context = canvas.getContext('2d');
+    setContext(canvas.getContext('2d'));
 
     if (context == null) return;
+  }, [context]);
 
-    draw(context, mousePosition);
-  }, [draw, mousePosition]);
+  useEffect(() => {
+    if (context && mousePosition) {
+      draw(context, mousePosition);
+    }
+  }, [context, mousePosition]);
 
   const onMouseMove = (event: React.MouseEvent) => {
     if (mouseDown) {
@@ -30,15 +38,28 @@ export const DrawBoard = (props: any) => {
         x: event.nativeEvent.offsetX,
         y: event.nativeEvent.offsetY,
       };
+
       setMousePosition((prevState) => ({ ...prevState, ...newPosition }));
     }
   };
 
   const onMouseDown = (event: React.MouseEvent) => {
+    const mouseDownPosition = {
+      x: event.nativeEvent.offsetX,
+      y: event.nativeEvent.offsetY,
+    };
+
+    mouseDownProp(mouseDownPosition);
     setMouseDown(true);
   };
 
   const onMouseUp = (event: React.MouseEvent) => {
+    const mouseUpPosition = {
+      x: event.nativeEvent.offsetX,
+      y: event.nativeEvent.offsetY,
+    };
+
+    mouseUpProp(mouseUpPosition);
     setMouseDown(false);
     setMousePosition(null);
   };
@@ -46,8 +67,8 @@ export const DrawBoard = (props: any) => {
   return (
     <div className={classes.DrawBoard}>
       <canvas
-        width={500}
-        height={600}
+        width={canvasSize.width}
+        height={canvasSize.height}
         ref={canvasRef}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}

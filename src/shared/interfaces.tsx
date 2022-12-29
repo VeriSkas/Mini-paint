@@ -22,6 +22,7 @@ export interface SelectProps {
   value: string | '';
   options: { value: string, id: string }[] | [];
   labelText: string;
+  type?: string;
 }
 
 export interface FormControl {
@@ -56,6 +57,7 @@ export interface ValidationType {
 export interface Tools {
   [tool: string]: {
     path: string,
+    value: string,
   };
 }
 

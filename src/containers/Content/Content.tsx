@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Select } from '../../components/UI/Select/Select';
 import { InputLabels, TitleText } from '../../shared/text/text';
@@ -11,24 +11,10 @@ export const Content = () => {
     { value: 'Вася', id: '2' },
     { value: 'Гена', id: '3' },
   ]);
-  const [activeUserName, setActiveUserName] = useState<string>('Гена');
-
-  useEffect(() => {
-    if (users.length) {
-      setActiveUserName(users[0].value);
-    }
-  }, [users]);
+  const [activeUserName, setActiveUserName] = useState<string>(users[0].id);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    if (event.target.value) {
-      const activeUser = findUserNameById(event.target.value);
-
-      setActiveUserName(activeUser);
-    }
-  };
-
-  const findUserNameById = (id: string) => {
-    return users.find((user) => user.id === id)?.value || '';
+    setActiveUserName(event.target.value);
   };
 
   return (
@@ -36,12 +22,10 @@ export const Content = () => {
       <h1 className={classes.Title}>{TitleText.images}</h1>
       <div className={classes.ContentBody}>
         <Select
+          onChange={onChangeHandler}
           value={activeUserName}
           labelText={InputLabels.select}
           options={users.length ? users : []}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-            onChangeHandler(event)
-          }
         />
         <ImageBoard />
       </div>

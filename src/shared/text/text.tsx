@@ -33,6 +33,7 @@ export const InputLabels = {
   password: 'Password',
   password2: 'Repeat password',
   select: 'Choose user',
+  selectLine: 'Line width:',
 };
 
 export const ButtonTypes = {
