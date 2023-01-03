@@ -44,7 +44,7 @@ export const createImage = async (image: ImageInDB) => {
   const imagesRef = ref(database, 'images');
   const newImageRef = push(imagesRef);
 
-  await set(newImageRef, image);
+  return await set(newImageRef, image);
 };
 
 export const getImages = async (): Promise<ImageInDB[]> => {

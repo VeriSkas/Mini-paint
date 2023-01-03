@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { auth } from './api/apiConfig';
-
 import { Auth } from './containers/Auth/Auth';
 import { Content } from './containers/Content/Content';
 import { Editor } from './containers/Editor/Editor';

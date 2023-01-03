@@ -1,22 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { signUpHandler } from '../../api/apiHandlers/signUpHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
-import { FormControl, FormControlsSignUp } from '../../shared/interfaces';
+import { Notification } from '../../components/UI/Notification/Notification';
+import { instanceOfErrorResponse } from '../../shared/checkObjType';
+import {
+  ErrorResponse,
+  FormControl,
+  FormControlsSignUp,
+  NotificationType,
+  SuccessLoginResponse
+} from '../../shared/interfaces';
 import {
   ButtonTypes,
   ErrorMessages,
   InputLabels,
   InputTypes,
   LinkText,
+  NotificationTypeString,
   TitleText
 } from '../../shared/text/text';
 import { validateControl } from '../../shared/validation';
 import classes from './SignUp.module.scss';
 
 export const SignUp = () => {
+  const [notification, setNotification] = useState<NotificationType | null>(null);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [formControls, setFormControls] = useState<FormControlsSignUp>({
     nickname: {
@@ -71,16 +81,33 @@ export const SignUp = () => {
     },
   });
 
+  useEffect(() => {
+    if (notification) {
+      setTimeout(() => {
+        setNotification(() => null);
+
+      }, 5000)
+    }
+  }, [notification])
+
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
   };
 
-  const registrHandler = () => {
+  const registrHandler = async () => {
     const userNickname = formControls.nickname.value;
     const userEmail = formControls.email.value;
     const userPassword = formControls.password.value;
+    const response: ErrorResponse | SuccessLoginResponse = await signUpHandler(userNickname, userEmail, userPassword);
 
-    signUpHandler(userNickname, userEmail, userPassword);
+    if (instanceOfErrorResponse(response)) {
+      const errorNotification: NotificationType = {
+        type: NotificationTypeString.error,
+        text: response.error.code,
+      }
+
+      setNotification(() => ({ ...errorNotification }));
+    }
   }
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>, controlName: string) => {
@@ -134,25 +161,28 @@ export const SignUp = () => {
   };
 
   return (
-    <div className={classes.SignUp}>
-      <div className={classes.SignUpContainer}>
-        <form onSubmit={submitHandler} className={classes.SignUpForm}>
-          <h1>{TitleText.signUp}</h1>
-          {renderInputs()}
-          <div className={classes.SignUpFormBtns}>
-            <Button
-              type={ButtonTypes.success}
-              onClick={registrHandler}
-              disabled={!isFormValid}
-            >
-              {LinkText.signUp}
-            </Button>
-            <Link to={'/auth'}>
-              <Button>{LinkText.return}</Button>
-            </Link>
-          </div>
-        </form>
+    <>
+      <div className={classes.SignUp}>
+        <div className={classes.SignUpContainer}>
+          <form onSubmit={submitHandler} className={classes.SignUpForm}>
+            <h1>{TitleText.signUp}</h1>
+            {renderInputs()}
+            <div className={classes.SignUpFormBtns}>
+              <Button
+                type={ButtonTypes.success}
+                onClick={registrHandler}
+                disabled={!isFormValid}
+              >
+                {LinkText.signUp}
+              </Button>
+              <Link to={'/auth'}>
+                <Button>{LinkText.return}</Button>
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+      {notification ? <Notification {...notification} /> : null}
+    </>
   );
 };

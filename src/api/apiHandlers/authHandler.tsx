@@ -4,22 +4,18 @@ import {
   UserCredential,
 } from 'firebase/auth';
 
+import { ErrorResponse, SuccessLoginResponse } from '../../shared/interfaces';
 import { localStorageHandler } from '../../shared/localStorage';
-
 import { auth } from '../apiConfig';
 
-export const authHandler = (email: string, password: string) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential: UserCredential) => {
-      const user = userCredential.user;
+export const authHandler = async (email: string, password: string) => {
+  const result = await signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential: UserCredential): SuccessLoginResponse => ({
+      user: userCredential.user,
+    }))
+    .catch((error): ErrorResponse => ({ error }));
 
-      localStorageHandler('setItem', 'uid', user.uid);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error);
-    });
+  return result;
 };
 
 export const logOutHandler = () => {

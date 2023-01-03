@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { authHandler } from '../../api/apiHandlers/authHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
-import { FormControl, FormControlsAuth } from '../../shared/interfaces';
+import { Notification } from '../../components/UI/Notification/Notification';
+import { instanceOfErrorResponse, instanceOfSuccessLoginResponse } from '../../shared/checkObjType';
+import {
+  ErrorResponse,
+  FormControl,
+  FormControlsAuth,
+  NotificationType,
+  SuccessLoginResponse
+} from '../../shared/interfaces';
+import { localStorageHandler } from '../../shared/localStorage';
 import {
   ButtonTypes,
   ErrorMessages,
   InputLabels,
   InputTypes,
   LinkText,
+  NotificationTypeString,
   TitleText
 } from '../../shared/text/text';
 import { validateControl } from '../../shared/validation';
@@ -18,6 +28,7 @@ import classes from './Auth.module.scss';
 
 export const Auth = () => {
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [notification, setNotification] = useState<NotificationType | null>(null);
   const [formControls, setFormControls] = useState<FormControlsAuth>({
     email: {
       value: '',
@@ -45,6 +56,15 @@ export const Auth = () => {
     },
   });
 
+  useEffect(() => {
+    if (notification) {
+      setTimeout(() => {
+        setNotification(() => null);
+
+      }, 5000)
+    }
+  }, [notification])
+
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
   };
@@ -65,19 +85,29 @@ export const Auth = () => {
     });
 
     setIsFormValid(isFormValidValue);
-    setFormControls(prevState => ({...prevState, ...formControlsCopy}));
+    setFormControls(prevState => ({ ...prevState, ...formControlsCopy }));
   };
 
-  const loginHandler = () => {
+  const loginHandler = async () => {
     const userEmail = formControls.email.value;
     const userPassword = formControls.password.value;
+    const response: ErrorResponse | SuccessLoginResponse = await authHandler(userEmail, userPassword);
 
-    authHandler(userEmail, userPassword);
+    if (instanceOfErrorResponse(response)) {
+      const errorNotification: NotificationType = {
+        type: NotificationTypeString.error,
+        text: response.error.code,
+      }
+
+      setNotification(() => ({ ...errorNotification }));
+    } else if (instanceOfSuccessLoginResponse(response)) {
+      localStorageHandler('setItem', 'uid', response.user.uid);
+    }
   }
 
   const renderInputs = () => {
     return Object.keys(formControls as FormControlsAuth).map((controlName: string, i) => {
-      const control = {...formControls[controlName as keyof FormControlsAuth]};
+      const control = { ...formControls[controlName as keyof FormControlsAuth] };
 
       return (
         <Input
@@ -96,28 +126,31 @@ export const Auth = () => {
   };
 
   return (
-    <div className={classes.Auth}>
-      <div className={classes.AuthContainer}>
-        <form
-          onSubmit={submitHandler}
-          className={classes.AuthForm}
+    <>
+      <div className={classes.Auth}>
+        <div className={classes.AuthContainer}>
+          <form
+            onSubmit={submitHandler}
+            className={classes.AuthForm}
           >
-          <h1>{TitleText.auth}</h1>
-          {renderInputs()}
-          <div className={classes.AuthFormBtns}>
-            <Button
-              type={ButtonTypes.success}
-              onClick={loginHandler}
-              disabled={!isFormValid}
-            >
-              {LinkText.start}
-            </Button>
-            <Link to={'/sign-up'}>
-              <Button>{LinkText.signUp}</Button>
-            </Link>
-          </div>
-        </form>
+            <h1>{TitleText.auth}</h1>
+            {renderInputs()}
+            <div className={classes.AuthFormBtns}>
+              <Button
+                type={ButtonTypes.success}
+                onClick={loginHandler}
+                disabled={!isFormValid}
+              >
+                {LinkText.start}
+              </Button>
+              <Link to={'/sign-up'}>
+                <Button>{LinkText.signUp}</Button>
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+      {notification ? <Notification {...notification} /> : null}
+    </>
   );
 };

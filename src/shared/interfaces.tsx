@@ -1,3 +1,5 @@
+import { User } from 'firebase/auth';
+
 export interface InputProps {
   label: string;
   type?: string;
@@ -84,4 +86,17 @@ export interface ImageInDB {
 export interface OptionsType {
   value: string;
   id: string;
+}
+
+export interface NotificationType {
+  type: string;
+  text: string;
+}
+
+export interface SuccessLoginResponse {
+  user: User
+}
+
+export interface ErrorResponse {
+  error: any
 }

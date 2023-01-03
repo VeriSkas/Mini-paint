@@ -21,6 +21,11 @@ export const ErrorMessages = {
   inputPassword2: 'Your passwords don`t equal',
   inputEmail: 'Enter valid email',
   inputNickname: 'Nickname must contain from 4 to 32 characters ',
+  samePicture: 'This picture has already been saved',
+};
+
+export const SuccessMessages = {
+  savePicture: 'Pictures was saved',
 };
 
 export const InputTypes = {
@@ -45,4 +50,9 @@ export const ButtonTypes = {
 
 export const ContentText = {
   noImages: 'There are no images',
+};
+
+export const NotificationTypeString = {
+  error: 'Error',
+  success: 'Success',
 };

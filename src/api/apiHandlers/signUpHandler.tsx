@@ -4,12 +4,12 @@ import { localStorageHandler } from '../../shared/localStorage';
 import { auth } from '../apiConfig';
 import { createUser } from './dataBaseHandler';
 
-export const signUpHandler = (
+export const signUpHandler = async (
   nickname: string,
   email: string,
   password: string
 ) => {
-  createUserWithEmailAndPassword(auth, email, password)
+  const result = await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential: UserCredential) => {
       const user = userCredential.user;
       const userInfo = {
@@ -20,10 +20,9 @@ export const signUpHandler = (
 
       localStorageHandler('setItem', 'uid', user.uid);
       createUser(userInfo);
+      return { user };
     })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error);
-    });
+    .catch((error) => ({ error }));
+
+  return result;
 };

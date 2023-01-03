@@ -3,16 +3,30 @@ import { useEffect, useState } from 'react';
 import { createImage } from '../../api/apiHandlers/dataBaseHandler';
 import { DrawBoard } from '../../components/DrawBoard/DrawBoard';
 import { EditorTools } from '../../components/EditorTools/EditorTools';
+import { Notification } from '../../components/UI/Notification/Notification';
 import { clearBoardHandler, drawDependOnBtn } from '../../editorFunctions';
-import { ImageInDB, MousePosition } from '../../shared/interfaces';
+import {
+  ImageInDB,
+  MousePosition,
+  NotificationType,
+} from '../../shared/interfaces';
 import { localStorageHandler } from '../../shared/localStorage';
-import { TitleText } from '../../shared/text/text';
+import {
+  ErrorMessages,
+  NotificationTypeString,
+  SuccessMessages,
+  TitleText,
+} from '../../shared/text/text';
 import classes from './Editor.module.scss';
 
 export const Editor = () => {
+  const [notification, setNotification] = useState<NotificationType | null>(
+    null
+  );
   const [canvasContext, setCanvasContext] =
     useState<CanvasRenderingContext2D | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
+  const [image, setImage] = useState<string>('');
   const [mousePosition, setMousePosition] = useState<MousePosition | null>(
     null
   );
@@ -24,6 +38,14 @@ export const Editor = () => {
   const [activeTool, setActiveTool] = useState('pencil');
   const [lineSize, setLineSize] = useState(2);
   const [activeColor, setActiveColor] = useState('black');
+
+  useEffect(() => {
+    if (notification) {
+      setTimeout(() => {
+        setNotification(() => null);
+      }, 5000);
+    }
+  }, [notification]);
 
   useEffect(() => {
     if (mousePosition && canvasContext) {
@@ -115,13 +137,34 @@ export const Editor = () => {
     const userUID = localStorageHandler('getItem', 'uid');
 
     if (canvas && userUID) {
-      const image = canvas.toDataURL();
+      const imageNew = canvas.toDataURL();
       const imageData: ImageInDB = {
-        image,
+        image: imageNew,
         userUID,
       };
+      const errorNotification: NotificationType = {
+        type: NotificationTypeString.error,
+        text: ErrorMessages.samePicture,
+      };
+      const successNotification: NotificationType = {
+        type: NotificationTypeString.success,
+        text: SuccessMessages.savePicture,
+      };
 
-      createImage(imageData);
+      if (imageNew !== image) {
+        setImage(imageNew);
+        createImage(imageData)
+          .then(() => {
+            setNotification(() => ({ ...successNotification }));
+          })
+          .catch((error) => {
+            setNotification(() => ({ ...errorNotification, error }));
+          });
+
+        return;
+      }
+
+      setNotification(() => ({ ...errorNotification }));
     }
   };
 
@@ -141,6 +184,7 @@ export const Editor = () => {
           mouseDown={mouseDown}
         />
       </div>
+      {notification ? <Notification {...notification} /> : null}
     </>
   );
 };
