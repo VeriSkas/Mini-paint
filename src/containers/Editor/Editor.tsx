@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 
+import { createImage } from '../../api/apiHandlers/dataBaseHandler';
 import { DrawBoard } from '../../components/DrawBoard/DrawBoard';
 import { EditorTools } from '../../components/EditorTools/EditorTools';
 import { clearBoardHandler, drawDependOnBtn } from '../../editorFunctions';
-import { MousePosition } from '../../shared/interfaces';
+import { ImageInDB, MousePosition } from '../../shared/interfaces';
+import { localStorageHandler } from '../../shared/localStorage';
 import { TitleText } from '../../shared/text/text';
 import classes from './Editor.module.scss';
 
 export const Editor = () => {
-  const [activeTool, setActiveTool] = useState('pencil');
   const [canvasContext, setCanvasContext] =
     useState<CanvasRenderingContext2D | null>(null);
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [mousePosition, setMousePosition] = useState<MousePosition | null>(
     null
   );
@@ -19,6 +21,7 @@ export const Editor = () => {
   );
   const [mouseDownPosition, setMouseDownPosition] =
     useState<MousePosition | null>(null);
+  const [activeTool, setActiveTool] = useState('pencil');
   const [lineSize, setLineSize] = useState(2);
   const [activeColor, setActiveColor] = useState('black');
 
@@ -56,6 +59,10 @@ export const Editor = () => {
     setMouseUpPosition(null);
   };
 
+  const takeCanvasData = (event: HTMLCanvasElement) => {
+    setCanvas(event);
+  };
+
   const draw = (
     context: CanvasRenderingContext2D,
     position: MousePosition | null
@@ -86,6 +93,11 @@ export const Editor = () => {
       return;
     }
 
+    if (btn === 'save') {
+      saveImg();
+      return;
+    }
+
     setActiveTool(btn);
   };
 
@@ -99,6 +111,20 @@ export const Editor = () => {
     setLineSize(numberSize);
   };
 
+  const saveImg = () => {
+    const userUID = localStorageHandler('getItem', 'uid');
+
+    if (canvas && userUID) {
+      const image = canvas.toDataURL();
+      const imageData: ImageInDB = {
+        image,
+        userUID,
+      };
+
+      createImage(imageData);
+    }
+  };
+
   return (
     <>
       <h1 className={classes.Title}>{TitleText.editor}</h1>
@@ -108,7 +134,12 @@ export const Editor = () => {
           changeColor={changeColor}
           lineChange={lineChange}
         />
-        <DrawBoard draw={draw} mouseUp={mouseUp} mouseDown={mouseDown} />
+        <DrawBoard
+          takeCanvasData={takeCanvasData}
+          draw={draw}
+          mouseUp={mouseUp}
+          mouseDown={mouseDown}
+        />
       </div>
     </>
   );

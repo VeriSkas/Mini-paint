@@ -5,13 +5,33 @@ import { signUpHandler } from '../../api/apiHandlers/signUpHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { FormControl, FormControlsSignUp } from '../../shared/interfaces';
-import { ButtonTypes, ErrorMessages, InputLabels, InputTypes, LinkText, TitleText } from '../../shared/text/text';
+import {
+  ButtonTypes,
+  ErrorMessages,
+  InputLabels,
+  InputTypes,
+  LinkText,
+  TitleText
+} from '../../shared/text/text';
 import { validateControl } from '../../shared/validation';
 import classes from './SignUp.module.scss';
 
 export const SignUp = () => {
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [formControls, setFormControls] = useState<FormControlsSignUp>({
+    nickname: {
+      value: '',
+      type: InputTypes.text,
+      label: InputLabels.nickname,
+      errorMessage: ErrorMessages.inputNickname,
+      valid: false,
+      touched: false,
+      validation: {
+        required: true,
+        minLength: 4,
+        maxLength: 32,
+      },
+    },
     email: {
       value: '',
       type: InputTypes.email,
@@ -56,10 +76,11 @@ export const SignUp = () => {
   };
 
   const registrHandler = () => {
+    const userNickname = formControls.nickname.value;
     const userEmail = formControls.email.value;
     const userPassword = formControls.password.value;
 
-    signUpHandler(userEmail, userPassword)
+    signUpHandler(userNickname, userEmail, userPassword);
   }
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>, controlName: string) => {

@@ -20,6 +20,7 @@ export const ErrorMessages = {
   inputPassword: 'Enter valid password',
   inputPassword2: 'Your passwords don`t equal',
   inputEmail: 'Enter valid email',
+  inputNickname: 'Nickname must contain from 4 to 32 characters ',
 };
 
 export const InputTypes = {
@@ -30,6 +31,7 @@ export const InputTypes = {
 
 export const InputLabels = {
   email: 'Email',
+  nickname: 'Nickname',
   password: 'Password',
   password2: 'Repeat password',
   select: 'Choose user',
@@ -39,4 +41,8 @@ export const InputLabels = {
 export const ButtonTypes = {
   standard: 'standard',
   success: 'success',
+};
+
+export const ContentText = {
+  noImages: 'There are no images',
 };

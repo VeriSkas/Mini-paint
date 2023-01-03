@@ -1,13 +1,10 @@
 import classes from './Image.module.scss';
-import img from '../../shared/img/img.jpg';
 
-export const Image = () => {
-  const imgPath = img;
-
+export const Image = (props: { src: string }) => {
   return (
     <div className={classes.Image}>
       <div className={classes.ImageContainer}>
-        <img src={imgPath} className={classes.ImageContent} alt="image" />
+        <img src={props.src} className={classes.ImageContent} alt="image" />
       </div>
     </div>
   );

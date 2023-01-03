@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { canvasSize } from '../../shared/constants';
 import { MousePosition } from '../../shared/interfaces';
-
 import classes from './DrawBoard.module.scss';
 
 export const DrawBoard = (props: any) => {
@@ -12,9 +11,6 @@ export const DrawBoard = (props: any) => {
   );
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-  const draw = props.draw;
-  const mouseDownProp = props.mouseDown;
-  const mouseUpProp = props.mouseUp;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,11 +20,13 @@ export const DrawBoard = (props: any) => {
     setContext(canvas.getContext('2d'));
 
     if (context == null) return;
-  }, [context]);
+
+    props.takeCanvasData(canvas);
+  }, [context, props.takeCanvasData]);
 
   useEffect(() => {
     if (context && mousePosition) {
-      draw(context, mousePosition);
+      props.draw(context, mousePosition);
     }
   }, [context, mousePosition]);
 
@@ -49,7 +47,7 @@ export const DrawBoard = (props: any) => {
       y: event.nativeEvent.offsetY,
     };
 
-    mouseDownProp(mouseDownPosition);
+    props.mouseDown(mouseDownPosition);
     setMouseDown(true);
   };
 
@@ -59,7 +57,7 @@ export const DrawBoard = (props: any) => {
       y: event.nativeEvent.offsetY,
     };
 
-    mouseUpProp(mouseUpPosition);
+    props.mouseUp(mouseUpPosition);
     setMouseDown(false);
     setMousePosition(null);
   };

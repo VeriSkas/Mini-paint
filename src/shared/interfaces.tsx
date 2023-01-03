@@ -23,6 +23,7 @@ export interface SelectProps {
   options: { value: string, id: string }[] | [];
   labelText: string;
   type?: string;
+  emptyField?: boolean;
 }
 
 export interface FormControl {
@@ -41,6 +42,7 @@ export interface FormControlsAuth {
 }
 
 export interface FormControlsSignUp {
+  nickname: FormControl;
   email: FormControl;
   password: FormControl;
   password2: FormControl;
@@ -64,4 +66,22 @@ export interface Tools {
 export interface MousePosition {
   x: number;
   y: number;
+}
+
+export interface UserInfoInDB {
+  id?: string | number | readonly string[];
+  uid: string;
+  email: string | null;
+  nickname: string;
+}
+
+export interface ImageInDB {
+  image: string;
+  id?: string | null;
+  userUID: string;
+}
+
+export interface OptionsType {
+  value: string;
+  id: string;
 }

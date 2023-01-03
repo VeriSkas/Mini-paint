@@ -1,9 +1,9 @@
-import { SelectProps } from '../../../shared/interfaces';
+import { OptionsType, SelectProps } from '../../../shared/interfaces';
 import classes from './Select.module.scss';
 
 export const Select = (props: SelectProps) => {
   const cls = [classes.Select, props.type ? classes[props.type] : ''];
-  const renderOptions = (options: { value: string, id: string }[] | []) => {
+  const renderOptions = (options: OptionsType[] | []) => {
     return options.map((option) => (
       <option key={option.id} value={option.id}>
         {option.value}
@@ -16,6 +16,7 @@ export const Select = (props: SelectProps) => {
       <label>
         {props.labelText}
         <select onChange={props.onChange} value={props.value}>
+          {props.emptyField ? <option value=""></option> : null}
           {renderOptions(props.options)}
         </select>
       </label>

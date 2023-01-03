@@ -5,6 +5,8 @@ import { getDatabase } from 'firebase/database';
 const firebaseConfig = {
   apiKey: 'AIzaSyDk_pqhC_XlgZYUOJp3KjwsTwNUMrMg_Vw',
   authDomain: 'mini-paint-924ca.firebaseapp.com',
+  databaseURL:
+    'https://mini-paint-924ca-default-rtdb.europe-west1.firebasedatabase.app/',
   projectId: 'mini-paint-924ca',
   storageBucket: 'mini-paint-924ca.appspot.com',
   messagingSenderId: '416135286735',

@@ -4,13 +4,16 @@ import {
   UserCredential,
 } from 'firebase/auth';
 
+import { localStorageHandler } from '../../shared/localStorage';
+
 import { auth } from '../apiConfig';
 
 export const authHandler = (email: string, password: string) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential: UserCredential) => {
       const user = userCredential.user;
-      console.log(user);
+
+      localStorageHandler('setItem', 'uid', user.uid);
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -20,5 +23,6 @@ export const authHandler = (email: string, password: string) => {
 };
 
 export const logOutHandler = () => {
+  localStorageHandler('removeItem', 'uid');
   signOut(auth);
 };
