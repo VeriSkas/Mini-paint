@@ -4,7 +4,10 @@ import { createImage } from '../../api/apiHandlers/dataBaseHandler';
 import { DrawBoard } from '../../components/DrawBoard/DrawBoard';
 import { EditorTools } from '../../components/EditorTools/EditorTools';
 import { Notification } from '../../components/UI/Notification/Notification';
-import { clearBoardHandler, drawDependOnBtn } from '../../editorFunctions';
+import {
+  clearBoardHandler,
+  drawDependOnBtn,
+} from '../../shared/editorFunctions';
 import {
   ImageInDB,
   MousePosition,
