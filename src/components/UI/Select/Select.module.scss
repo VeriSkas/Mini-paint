@@ -50,3 +50,21 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .Select {
+    &.little {
+      height: 25px;
+
+      label {
+        font-size: 10px;
+        margin-top: -7px;
+      }
+
+      select {
+        height: 20px;
+        padding: 2px;
+      }
+    }
+  }
+}

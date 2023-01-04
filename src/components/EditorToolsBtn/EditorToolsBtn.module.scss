@@ -25,3 +25,10 @@
     object-position: center;
   }
 }
+
+@media (max-width: 500px) {
+  .EditorToolsBtn {
+    width: 25px;
+    height: 25px;
+  }
+}

@@ -24,3 +24,22 @@
     }
   }
 }
+
+@media (max-width: 1400px) {
+  .ThemeToggler {
+    right: 200px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .ThemeToggler {
+    right: 110px;
+  }
+}
+
+@media (max-width: 500px) {
+  .ThemeToggler {
+    top: 60px;
+    right: 0;
+  }
+}

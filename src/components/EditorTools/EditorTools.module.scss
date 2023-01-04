@@ -34,3 +34,12 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .EditorTools {
+    .ColorInput {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
