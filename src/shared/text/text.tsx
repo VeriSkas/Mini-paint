@@ -56,3 +56,7 @@ export const NotificationTypeString = {
   error: 'Error',
   success: 'Success',
 };
+
+export const Tooltip = {
+  themeToggle: 'Change theme',
+};

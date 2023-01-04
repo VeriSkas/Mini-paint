@@ -8,6 +8,10 @@
   width: 100vw;
   background: rgba($color: $black, $alpha: .7);
 
+  &.Dark {
+    filter: invert(1);
+  }
+
   .NavBarContainer {
     display: flex;
     justify-content: space-between;

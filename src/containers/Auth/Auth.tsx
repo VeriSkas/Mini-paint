@@ -26,7 +26,8 @@ import {
 import { validateControl } from '../../shared/validation';
 import classes from './Auth.module.scss';
 
-export const Auth = () => {
+export const Auth = (props: any) => {
+  const cls = [classes.Auth, classes[props.theme]];
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [notification, setNotification] = useState<NotificationType | null>(null);
   const [formControls, setFormControls] = useState<FormControlsAuth>({
@@ -127,7 +128,7 @@ export const Auth = () => {
 
   return (
     <>
-      <div className={classes.Auth}>
+      <div className={cls.join(' ')}>
         <div className={classes.AuthContainer}>
           <form
             onSubmit={submitHandler}

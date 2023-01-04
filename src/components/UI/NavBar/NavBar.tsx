@@ -5,13 +5,15 @@ import { ButtonTypes, LinkText, TitleText } from '../../../shared/text/text';
 import { Button } from '../Button/Button';
 import classes from './NavBar.module.scss';
 
-export const NavBar = () => {
+export const NavBar = (props: any) => {
+  const cls = [classes.NavBar, classes[props.theme]];
+
   const logOut = () => {
     logOutHandler();
   };
 
   return (
-    <div className={classes.NavBar}>
+    <div className={cls.join(' ')}>
       <div className={classes.NavBarContainer}>
         <div className={classes.Title}>
           <div className={classes.Logo}></div>

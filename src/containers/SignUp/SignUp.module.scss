@@ -11,6 +11,17 @@
   background-repeat: no-repeat;
   background-position: center;
 
+  &.Dark {
+    filter: invert(1);
+
+    label, span {
+      filter: invert(1);
+    }
+  }
+
+  &.Light {
+    filter: invert(0);
+  }
 
   .SignUpContainer {
     width: 100%;

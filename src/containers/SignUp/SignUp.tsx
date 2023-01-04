@@ -25,7 +25,8 @@ import {
 import { validateControl } from '../../shared/validation';
 import classes from './SignUp.module.scss';
 
-export const SignUp = () => {
+export const SignUp = (props: any) => {
+  const cls = [classes.SignUp, classes[props.theme]];
   const [notification, setNotification] = useState<NotificationType | null>(null);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [formControls, setFormControls] = useState<FormControlsSignUp>({
@@ -162,7 +163,7 @@ export const SignUp = () => {
 
   return (
     <>
-      <div className={classes.SignUp}>
+      <div className={cls.join(' ')}>
         <div className={classes.SignUpContainer}>
           <form onSubmit={submitHandler} className={classes.SignUpForm}>
             <h1>{TitleText.signUp}</h1>

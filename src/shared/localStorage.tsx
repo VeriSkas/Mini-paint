@@ -9,7 +9,7 @@ export function localStorageHandler(func: string, key?: string, body?: any) {
       if (key) {
         const data = localStorage.getItem(key) || '';
 
-        return JSON.parse(data);
+        return data ? JSON.parse(data) : '';
       }
       break;
     case 'removeItem':

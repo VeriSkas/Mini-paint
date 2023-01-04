@@ -12,6 +12,14 @@
   background-color: $lightColor;
   background-position: center;
 
+  &.Dark {
+    filter: invert(1);
+
+    .Content {
+      filter: invert(1);
+    }
+  }
+
   .Content {
     display: flex;
     justify-content: center;
