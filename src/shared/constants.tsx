@@ -1,6 +1,9 @@
+export const screenWidth = window.innerWidth;
+export const screenHeight = window.innerHeight;
+
 export const canvasSize: { width: number, height: number } = {
-  width: 500,
-  height: 600,
+  width: screenWidth <= 520 ? 300 : 500,
+  height: screenHeight <= 930 ? 400 : 600,
 };
 
 export const canvasColor: string = 'rgb(223, 223, 223)';
