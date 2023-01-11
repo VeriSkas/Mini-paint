@@ -12,7 +12,9 @@ import { SignUp } from './containers/SignUp/SignUp';
 import { localStorageHandler } from './shared/localStorage';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorageHandler('getItem', 'uid') || false
+  );
   const [currentTheme, setCurrentTheme] = useState('');
 
   const protectedRoutes = (

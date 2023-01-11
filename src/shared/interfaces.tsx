@@ -75,8 +75,9 @@ export interface MousePosition {
 }
 
 export interface UserInfoInDB {
-  id?: string | number | readonly string[];
+  id?: string;
   uid: string;
+  keyInDataBase?: string;
   email: string | null;
   nickname: string;
 }
@@ -98,11 +99,11 @@ export interface NotificationType {
 }
 
 export interface SuccessLoginResponse {
-  user: User
+  user: User;
 }
 
 export interface ErrorResponse {
-  error: any
+  error: any;
 }
 
 export interface IInitialStateImages {
@@ -115,4 +116,11 @@ export interface IInitialStateEditor {
   activeTool: string;
   activeColor: string;
   lineSize: number;
+}
+
+export interface IInitialStateUsers {
+  users: UserInfoInDB[];
+  user: UserInfoInDB | null;
+  error: null | string;
+  loading: boolean;
 }

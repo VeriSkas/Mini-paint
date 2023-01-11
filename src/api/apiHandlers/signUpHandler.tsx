@@ -1,28 +1,28 @@
-import { createUserWithEmailAndPassword, UserCredential } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-import { localStorageHandler } from '../../shared/localStorage';
 import { auth } from '../apiConfig';
 import { createUser } from './dataBaseHandler';
 
-export const signUpHandler = async (
-  nickname: string,
+export const signUpHandler = async (userData: {
   email: string,
-  password: string
-) => {
-  const result = await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential: UserCredential) => {
-      const user = userCredential.user;
-      const userInfo = {
-        uid: user.uid,
-        email: user.email,
-        nickname,
-      };
+  nickname: string,
+  password: string,
+}) => {
+  const { nickname, email, password } = userData;
 
-      localStorageHandler('setItem', 'uid', user.uid);
-      createUser(userInfo);
-      return { user };
-    })
-    .catch((error) => ({ error }));
+  try {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    const user = result.user;
+    const userInfo = {
+      uid: user.uid,
+      email: user.email,
+      nickname,
+    };
 
-  return result;
+    createUser(userInfo);
+
+    return { user };
+  } catch (error) {
+    return { error };
+  }
 };

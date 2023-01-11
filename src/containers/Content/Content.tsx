@@ -1,32 +1,25 @@
 import { useEffect, useState } from 'react';
 
-import {
-  getUsers,
-  unsubscribeUsers,
-} from '../../api/apiHandlers/dataBaseHandler';
 import { Select } from '../../components/UI/Select/Select';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { OptionsType } from '../../shared/interfaces';
 import { InputLabels, TitleText } from '../../shared/text/text';
+import { fetchUsers } from '../../store/userSlice';
 import { ImageBoard } from '../ImageBoard/ImageBoard';
 import classes from './Content.module.scss';
 
 export const Content = () => {
-  const [users, setUsers] = useState<OptionsType[]>([]);
+  const dispatch = useAppDispatch();
   const [activeUserName, setActiveUserName] = useState<string>('');
+  const options: OptionsType[] = useAppSelector(
+    (state) => state.users.users
+  ).map((user) => ({
+    id: user.uid,
+    value: user.nickname,
+  }));
 
   useEffect((): void | any => {
-    getUsers().then((users) => {
-      if (users) {
-        const usersOptions: OptionsType[] = users.map((user) => ({
-          id: user.uid,
-          value: user.nickname,
-        }));
-
-        setUsers((state) => [...state, ...usersOptions]);
-      }
-    });
-
-    return () => unsubscribeUsers();
+    dispatch(fetchUsers());
   }, []);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -42,7 +35,7 @@ export const Content = () => {
           emptyField={true}
           value={activeUserName}
           labelText={InputLabels.select}
-          options={users.length ? users : []}
+          options={options.length ? options : []}
         />
         <ImageBoard user={activeUserName} />
       </div>

@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { authHandler } from '../../api/apiHandlers/authHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { Notification } from '../../components/UI/Notification/Notification';
-import { instanceOfErrorResponse, instanceOfSuccessLoginResponse } from '../../shared/checkObjType';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
-  ErrorResponse,
   FormControl,
   FormControlsAuth,
   NotificationType,
-  SuccessLoginResponse
 } from '../../shared/interfaces';
-import { localStorageHandler } from '../../shared/localStorage';
 import {
   ButtonTypes,
   ErrorMessages,
@@ -24,10 +20,13 @@ import {
   TitleText
 } from '../../shared/text/text';
 import { validateControl } from '../../shared/validation';
+import { removeError, signInUser } from '../../store/userSlice';
 import classes from './Auth.module.scss';
 
 export const Auth = (props: any) => {
   const cls = [classes.Auth, classes[props.theme]];
+  const dispatch = useAppDispatch();
+  const error = useAppSelector(state => state.users.error);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [notification, setNotification] = useState<NotificationType | null>(null);
   const [formControls, setFormControls] = useState<FormControlsAuth>({
@@ -58,13 +57,24 @@ export const Auth = (props: any) => {
   });
 
   useEffect(() => {
+    if (error) {
+      const errorNotification: NotificationType = {
+        type: NotificationTypeString.error,
+        text: error,
+      }
+
+      setNotification(() => ({ ...errorNotification }));
+    }
+  }, [error])
+
+  useEffect(() => {
     if (notification) {
       setTimeout(() => {
         setNotification(() => null);
-
+        dispatch(removeError());
       }, 5000)
     }
-  }, [notification])
+  }, [error, notification])
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -90,20 +100,10 @@ export const Auth = (props: any) => {
   };
 
   const loginHandler = async () => {
-    const userEmail = formControls.email.value;
-    const userPassword = formControls.password.value;
-    const response: ErrorResponse | SuccessLoginResponse = await authHandler(userEmail, userPassword);
+    const email = formControls.email.value;
+    const password = formControls.password.value;
 
-    if (instanceOfErrorResponse(response)) {
-      const errorNotification: NotificationType = {
-        type: NotificationTypeString.error,
-        text: response.error.code,
-      }
-
-      setNotification(() => ({ ...errorNotification }));
-    } else if (instanceOfSuccessLoginResponse(response)) {
-      localStorageHandler('setItem', 'uid', response.user.uid);
-    }
+    dispatch(signInUser({email, password}));
   }
 
   const renderInputs = () => {

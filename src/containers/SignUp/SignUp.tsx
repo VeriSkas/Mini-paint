@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { signUpHandler } from '../../api/apiHandlers/signUpHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { Notification } from '../../components/UI/Notification/Notification';
-import { instanceOfErrorResponse } from '../../shared/checkObjType';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
-  ErrorResponse,
   FormControl,
   FormControlsSignUp,
   NotificationType,
-  SuccessLoginResponse
 } from '../../shared/interfaces';
 import {
   ButtonTypes,
@@ -23,10 +20,13 @@ import {
   TitleText
 } from '../../shared/text/text';
 import { validateControl } from '../../shared/validation';
+import { removeError, signUpUser } from '../../store/userSlice';
 import classes from './SignUp.module.scss';
 
 export const SignUp = (props: any) => {
   const cls = [classes.SignUp, classes[props.theme]];
+  const dispatch = useAppDispatch();
+  const error = useAppSelector(state => state.users.error);
   const [notification, setNotification] = useState<NotificationType | null>(null);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [formControls, setFormControls] = useState<FormControlsSignUp>({
@@ -83,32 +83,35 @@ export const SignUp = (props: any) => {
   });
 
   useEffect(() => {
+    if (error) {
+      const errorNotification: NotificationType = {
+        type: NotificationTypeString.error,
+        text: error,
+      }
+
+      setNotification(() => ({ ...errorNotification }));
+    }
+  }, [error])
+
+  useEffect(() => {
     if (notification) {
       setTimeout(() => {
         setNotification(() => null);
-
+        dispatch(removeError());
       }, 5000)
     }
-  }, [notification])
+  }, [error, notification])
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
   };
 
   const registrHandler = async () => {
-    const userNickname = formControls.nickname.value;
-    const userEmail = formControls.email.value;
-    const userPassword = formControls.password.value;
-    const response: ErrorResponse | SuccessLoginResponse = await signUpHandler(userNickname, userEmail, userPassword);
+    const nickname = formControls.nickname.value;
+    const email = formControls.email.value;
+    const password = formControls.password.value;
 
-    if (instanceOfErrorResponse(response)) {
-      const errorNotification: NotificationType = {
-        type: NotificationTypeString.error,
-        text: response.error.code,
-      }
-
-      setNotification(() => ({ ...errorNotification }));
-    }
+    dispatch(signUpUser({nickname, email, password}))
   }
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>, controlName: string) => {
