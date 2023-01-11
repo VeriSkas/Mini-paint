@@ -1,4 +1,8 @@
 import { User } from 'firebase/auth';
+import { store } from '../store/store';
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export interface InputProps {
   label: string;
@@ -99,4 +103,10 @@ export interface SuccessLoginResponse {
 
 export interface ErrorResponse {
   error: any
+}
+
+export interface IInitialState {
+  images: ImageInDB[];
+  error: null;
+  loading: boolean;
 }

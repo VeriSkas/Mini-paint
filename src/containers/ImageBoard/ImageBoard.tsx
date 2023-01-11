@@ -1,34 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import {
-  getImages,
-  unsubscribeImages,
-} from '../../api/apiHandlers/dataBaseHandler';
 import { Image } from '../../components/Image/Image';
 import { TextMessage } from '../../components/UI/TextMessage/TextMessage';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ImageInDB } from '../../shared/interfaces';
 import { ContentText } from '../../shared/text/text';
+import { fetchImages, filterImagesByUser } from '../../store/imageSlice';
 import classes from './ImageBoard.module.scss';
 
-export const ImageBoard = (props: any) => {
-  const [images, setImages] = useState<ImageInDB[]>([]);
+export const ImageBoard = (props: { user: string }) => {
+  const dispatch = useAppDispatch();
+  const images = useAppSelector((state) => state.images.images);
 
-  useEffect((): void | any => {
-    getImages().then((res: ImageInDB[]) => {
-      if (res.length) {
-        if (props.user) {
-          const userImages: ImageInDB[] = res.filter(
-            (image) => image.userUID === props.user
-          );
-
-          setImages(() => [...userImages]);
-        } else {
-          setImages(() => [...res]);
-        }
-      }
-    });
-
-    return () => unsubscribeImages();
+  useEffect((): void => {
+    if (props.user) {
+      dispatch(filterImagesByUser(props.user));
+    } else {
+      dispatch(fetchImages());
+    }
   }, [props.user]);
 
   const renderImages = (images: ImageInDB[]) => {
