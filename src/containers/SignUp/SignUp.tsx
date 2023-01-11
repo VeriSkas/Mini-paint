@@ -23,7 +23,7 @@ import { validateControl } from '../../shared/validation';
 import { removeError, signUpUser } from '../../store/userSlice';
 import classes from './SignUp.module.scss';
 
-export const SignUp = (props: any) => {
+export const SignUp = (props: {theme: string}) => {
   const cls = [classes.SignUp, classes[props.theme]];
   const dispatch = useAppDispatch();
   const error = useAppSelector(state => state.users.error);

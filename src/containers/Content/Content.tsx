@@ -18,7 +18,7 @@ export const Content = () => {
     value: user.nickname,
   }));
 
-  useEffect((): void | any => {
+  useEffect((): void => {
     dispatch(fetchUsers());
   }, []);
 

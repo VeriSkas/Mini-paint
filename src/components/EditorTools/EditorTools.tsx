@@ -10,7 +10,7 @@ import { EditorToolsBtn } from '../EditorToolsBtn/EditorToolsBtn';
 import { Select } from '../UI/Select/Select';
 import classes from './EditorTools.module.scss';
 
-export const EditorTools = (props: any) => {
+export const EditorTools = (props: {onClick: (btn: string) => void}) => {
   const toolsParams: Tools = tools;
   const lines = linesWidth;
   const dispatch = useAppDispatch();

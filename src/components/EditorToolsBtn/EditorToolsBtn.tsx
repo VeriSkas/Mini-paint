@@ -1,6 +1,10 @@
 import classes from './EditorToolsBtn.module.scss';
 
-export const EditorToolsBtn = (props: any) => {
+export const EditorToolsBtn = (props: {
+  img: string,
+  onClick: (value: string) => void,
+  value: string,
+}) => {
   return (
     <div
       className={classes.EditorToolsBtn}

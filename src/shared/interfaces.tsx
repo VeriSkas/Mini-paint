@@ -23,6 +23,16 @@ export interface ButtonProps {
   children?: string;
 }
 
+export interface DrawBoardProps {
+  mouseUp: (position: { x: number, y: number }) => void;
+  mouseDown: (position: { x: number, y: number }) => void;
+  draw: (
+    context: CanvasRenderingContext2D,
+    mousePosition: MousePosition
+  ) => void;
+  takeCanvasData: (canvas: HTMLCanvasElement) => void;
+}
+
 export interface SelectProps {
   onChange: any;
   value: string | '';

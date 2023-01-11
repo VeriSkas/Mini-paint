@@ -23,7 +23,7 @@ import { validateControl } from '../../shared/validation';
 import { removeError, signInUser } from '../../store/userSlice';
 import classes from './Auth.module.scss';
 
-export const Auth = (props: any) => {
+export const Auth = (props: {theme: string}) => {
   const cls = [classes.Auth, classes[props.theme]];
   const dispatch = useAppDispatch();
   const error = useAppSelector(state => state.users.error);

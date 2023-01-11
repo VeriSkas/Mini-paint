@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 import { NavBar } from '../../components/UI/NavBar/NavBar';
 import classes from './MainPage.module.scss';
 
-export const MainPage = (props: any) => {
+export const MainPage = (props: { theme: string }) => {
   const cls = [classes.MainPage, classes[props.theme]];
 
   return (

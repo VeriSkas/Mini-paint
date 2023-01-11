@@ -4,7 +4,9 @@ import { localStorageHandler } from '../../shared/localStorage';
 import { Tooltip } from '../../shared/text/text';
 import classes from './ThemeToggler.module.scss';
 
-export const ThemeToggler = (props: any) => {
+export const ThemeToggler = (props: {
+  themeToggler: (theme: string) => void,
+}) => {
   const [theme, setTheme] = useState('');
   const [cls, setClasses] = useState([classes.TogglerIcon]);
 
