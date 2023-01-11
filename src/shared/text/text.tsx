@@ -1,3 +1,5 @@
+import { NotificationType } from '../interfaces';
+
 export const LinkText = {
   home: 'Home',
   editor: 'Editor',
@@ -22,6 +24,7 @@ export const ErrorMessages = {
   inputEmail: 'Enter valid email',
   inputNickname: 'Nickname must contain from 4 to 32 characters ',
   samePicture: 'This picture has already been saved',
+  cleanBlank: 'You must draw something',
 };
 
 export const SuccessMessages = {
@@ -59,4 +62,14 @@ export const NotificationTypeString = {
 
 export const Tooltip = {
   themeToggle: 'Change theme',
+};
+
+export const errorNotification: NotificationType = {
+  type: NotificationTypeString.error,
+  text: ErrorMessages.samePicture,
+};
+
+export const successNotification: NotificationType = {
+  type: NotificationTypeString.success,
+  text: SuccessMessages.savePicture,
 };

@@ -105,8 +105,14 @@ export interface ErrorResponse {
   error: any
 }
 
-export interface IInitialState {
+export interface IInitialStateImages {
   images: ImageInDB[];
   error: null;
   loading: boolean;
+}
+
+export interface IInitialStateEditor {
+  activeTool: string;
+  activeColor: string;
+  lineSize: number;
 }

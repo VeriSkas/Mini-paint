@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 
+import { useAppDispatch } from '../../hooks';
 import { linesWidth } from '../../shared/constants';
 import { Tools } from '../../shared/interfaces';
 import { InputLabels } from '../../shared/text/text';
 import { tools } from '../../shared/tools';
+import { changeColorAction, changeLineSizeAction } from '../../store/EditorSlice';
 import { EditorToolsBtn } from '../EditorToolsBtn/EditorToolsBtn';
 import { Select } from '../UI/Select/Select';
 import classes from './EditorTools.module.scss';
 
 export const EditorTools = (props: any) => {
   const toolsParams: Tools = tools;
-  const [lines, setLines] = useState(linesWidth);
-  const [activeLine, setActiveLine] = useState(linesWidth[1].value);
+  const lines = linesWidth;
+  const dispatch = useAppDispatch();
+  const [activeLine, setActiveLine] = useState(lines[1].value);
 
   const changeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.changeColor(event.target.value);
+    dispatch(changeColorAction(event.target.value));
   }
 
   const lineChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const numberSize = parseInt(event.target.value);
+
     setActiveLine(event.target.value);
-    props.lineChange(event.target.value);
+    dispatch(changeLineSizeAction(numberSize));
   }
 
   const renderTools = () => {

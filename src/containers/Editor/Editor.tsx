@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { createImage } from '../../api/apiHandlers/dataBaseHandler';
 import { DrawBoard } from '../../components/DrawBoard/DrawBoard';
 import { EditorTools } from '../../components/EditorTools/EditorTools';
 import { Notification } from '../../components/UI/Notification/Notification';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   clearBoardHandler,
   drawDependOnBtn,
@@ -16,10 +16,12 @@ import {
 import { localStorageHandler } from '../../shared/localStorage';
 import {
   ErrorMessages,
-  NotificationTypeString,
-  SuccessMessages,
+  errorNotification,
+  successNotification,
   TitleText,
 } from '../../shared/text/text';
+import { setActiveToolAction } from '../../store/EditorSlice';
+import { addImage } from '../../store/imageSlice';
 import classes from './Editor.module.scss';
 
 export const Editor = () => {
@@ -38,9 +40,11 @@ export const Editor = () => {
   );
   const [mouseDownPosition, setMouseDownPosition] =
     useState<MousePosition | null>(null);
-  const [activeTool, setActiveTool] = useState('pencil');
-  const [lineSize, setLineSize] = useState(2);
-  const [activeColor, setActiveColor] = useState('black');
+
+  const dispatch = useAppDispatch();
+  const activeColor = useAppSelector((state) => state.editor.activeColor);
+  const lineSize = useAppSelector((state) => state.editor.lineSize);
+  const activeTool = useAppSelector((state) => state.editor.activeTool);
 
   useEffect(() => {
     if (notification) {
@@ -62,15 +66,7 @@ export const Editor = () => {
         mouseUpPosition
       );
     }
-  }, [
-    activeTool,
-    lineSize,
-    canvasContext,
-    mousePosition,
-    mouseDownPosition,
-    mouseUpPosition,
-    activeColor,
-  ]);
+  }, [canvasContext, mousePosition, mouseDownPosition, mouseUpPosition]);
 
   useEffect(() => {
     if (mouseUpPosition) {
@@ -123,17 +119,11 @@ export const Editor = () => {
       return;
     }
 
-    setActiveTool(btn);
-  };
+    if (btn === 'bin') {
+      return;
+    }
 
-  const changeColor = (color: string) => {
-    setActiveColor(color);
-  };
-
-  const lineChange = (size: string) => {
-    const numberSize = parseInt(size);
-
-    setLineSize(numberSize);
+    dispatch(setActiveToolAction(btn));
   };
 
   const saveImg = () => {
@@ -145,29 +135,25 @@ export const Editor = () => {
         image: imageNew,
         userUID,
       };
-      const errorNotification: NotificationType = {
-        type: NotificationTypeString.error,
-        text: ErrorMessages.samePicture,
-      };
-      const successNotification: NotificationType = {
-        type: NotificationTypeString.success,
-        text: SuccessMessages.savePicture,
-      };
+      const error = errorNotification;
+      const success = successNotification;
 
-      if (imageNew !== image) {
-        setImage(imageNew);
-        createImage(imageData)
-          .then(() => {
-            setNotification(() => ({ ...successNotification }));
-          })
-          .catch((error) => {
-            setNotification(() => ({ ...errorNotification, error }));
-          });
+      if (!canvasContext?.getImageData) {
+        error.text = ErrorMessages.cleanBlank;
+        setNotification(() => ({ ...error }));
 
         return;
       }
 
-      setNotification(() => ({ ...errorNotification }));
+      if (imageNew === image) {
+        setNotification(() => ({ ...error }));
+
+        return;
+      }
+
+      setImage(imageNew);
+      dispatch(addImage(imageData));
+      setNotification(() => ({ ...success }));
     }
   };
 
@@ -175,11 +161,7 @@ export const Editor = () => {
     <>
       <h1 className={classes.Title}>{TitleText.editor}</h1>
       <div className={classes.EditorBody}>
-        <EditorTools
-          onClick={(btn: string) => setActiveToolBtn(btn)}
-          changeColor={changeColor}
-          lineChange={lineChange}
-        />
+        <EditorTools onClick={(btn: string) => setActiveToolBtn(btn)} />
         <DrawBoard
           takeCanvasData={takeCanvasData}
           draw={draw}
