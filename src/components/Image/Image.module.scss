@@ -4,6 +4,17 @@
   padding: 10px;
   margin: 0 10px 10px 0;
 
+  &:hover {
+    .ImageContainer {
+      overflow: hidden;
+
+      .ImageContent {
+        transition: 1s;
+        transform: scale(1.5);
+      }
+    }
+  }
+
   .ImageContainer {
     width: 140px;
     height: 210px;
