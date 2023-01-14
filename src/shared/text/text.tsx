@@ -19,6 +19,11 @@ export const TitleText = {
 
 export const ErrorMessages = {
   input: 'Enter right value',
+  inputRequired: 'You should enter something',
+  inputMinLength: (value: number) =>
+    `You should enter ${value} symbols or more`,
+  inputMaxLength: (value: number) =>
+    `You should enter less then ${value} symbols`,
   inputPassword: 'Enter valid password',
   inputPassword2: 'Your passwords don`t equal',
   inputEmail: 'Enter valid email',
@@ -37,11 +42,18 @@ export const InputTypes = {
   password: 'password',
 };
 
-export const InputLabels = {
+export const InputLabelsName = {
   email: 'Email',
   nickname: 'Nickname',
   password: 'Password',
   password2: 'Repeat password',
+};
+
+export const InputLabels = {
+  email: 'email',
+  nickname: 'nickname',
+  password: 'password',
+  password2: 'password2',
   select: 'Choose user',
   selectLine: 'Line width:',
 };

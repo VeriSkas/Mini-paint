@@ -1,19 +1,35 @@
 import { User } from 'firebase/auth';
+import { UseFormRegister } from 'react-hook-form';
+
 import { store } from '../store/store';
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
+export interface Inputs {
+  [key: string]: string;
+}
+
+export interface IInput {
+  value: string;
+  type: string;
+  label: string;
+  labelName: string;
+  validation: {
+    [key: string]:
+      | { value: number | boolean | RegExp, message: string }
+      | ((value: string) => boolean | string),
+  };
+}
+
 export interface InputProps {
   label: string;
-  type?: string;
+  labelName: string;
+  type: string;
   value: string;
-  readOnly?: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  valid: boolean;
-  touched: boolean;
-  shouldValidate: boolean;
-  errorMessage: string;
+  validation: any;
+  register: UseFormRegister<Inputs>;
+  error: string | undefined;
 }
 
 export interface ButtonProps {
@@ -40,36 +56,6 @@ export interface SelectProps {
   labelText: string;
   type?: string;
   emptyField?: boolean;
-}
-
-export interface FormControl {
-  value: string;
-  type: string;
-  label: string;
-  errorMessage: string;
-  valid: boolean;
-  touched: boolean;
-  validation: ValidationType;
-}
-
-export interface FormControlsAuth {
-  email: FormControl;
-  password: FormControl;
-}
-
-export interface FormControlsSignUp {
-  nickname: FormControl;
-  email: FormControl;
-  password: FormControl;
-  password2: FormControl;
-}
-
-export interface ValidationType {
-  required?: boolean;
-  email?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  isEqual?: boolean;
 }
 
 export interface Tools {

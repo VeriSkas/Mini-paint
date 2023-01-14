@@ -9,12 +9,13 @@ import { Content } from './containers/Content/Content';
 import { Editor } from './containers/Editor/Editor';
 import { MainPage } from './containers/MainPage/MainPage';
 import { SignUp } from './containers/SignUp/SignUp';
+import { themes } from './shared/constants';
 import { localStorageHandler } from './shared/localStorage';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorageHandler('getItem', 'uid') || false
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorageHandler('getItem', 'uid') || false;
+  });
   const [currentTheme, setCurrentTheme] = useState('');
 
   const protectedRoutes = (
@@ -31,7 +32,7 @@ function App() {
   );
 
   useEffect(() => {
-    const theme = localStorageHandler('getItem', 'theme') || 'Light';
+    const theme = localStorageHandler('getItem', 'theme') || themes.light;
 
     setCurrentTheme(theme);
   }, []);

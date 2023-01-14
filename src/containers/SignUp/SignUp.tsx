@@ -1,182 +1,114 @@
 import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { Notification } from '../../components/UI/Notification/Notification';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import {
-  FormControl,
-  FormControlsSignUp,
-  NotificationType,
-} from '../../shared/interfaces';
+import { inputs } from '../../shared/constants';
+import { Inputs, NotificationType } from '../../shared/interfaces';
 import {
   ButtonTypes,
   ErrorMessages,
-  InputLabels,
-  InputTypes,
   LinkText,
   NotificationTypeString,
-  TitleText
+  TitleText,
 } from '../../shared/text/text';
-import { validateControl } from '../../shared/validation';
 import { removeError, signUpUser } from '../../store/userSlice';
 import classes from './SignUp.module.scss';
 
-export const SignUp = (props: {theme: string}) => {
+export const SignUp = (props: { theme: string }) => {
   const cls = [classes.SignUp, classes[props.theme]];
   const dispatch = useAppDispatch();
-  const error = useAppSelector(state => state.users.error);
-  const [notification, setNotification] = useState<NotificationType | null>(null);
-  const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  const [formControls, setFormControls] = useState<FormControlsSignUp>({
-    nickname: {
-      value: '',
-      type: InputTypes.text,
-      label: InputLabels.nickname,
-      errorMessage: ErrorMessages.inputNickname,
-      valid: false,
-      touched: false,
-      validation: {
-        required: true,
-        minLength: 4,
-        maxLength: 32,
-      },
-    },
-    email: {
-      value: '',
-      type: InputTypes.email,
-      label: InputLabels.email,
-      errorMessage: ErrorMessages.inputEmail,
-      valid: false,
-      touched: false,
-      validation: {
-        required: true,
-        email: true,
-      },
-    },
-    password: {
-      value: '',
-      type: InputTypes.password,
-      label: InputLabels.password,
-      errorMessage: ErrorMessages.inputPassword,
-      valid: false,
-      touched: false,
-      validation: {
-        required: true,
-        minLength: 6,
-      },
-    },
-    password2: {
-      value: '',
-      type: InputTypes.password,
-      label: InputLabels.password2,
-      errorMessage: ErrorMessages.inputPassword2,
-      valid: false,
-      touched: false,
-      validation: {
-        required: true,
-        minLength: 6,
-        isEqual: true,
-      },
-    },
+  const error = useAppSelector((state) => state.users.error);
+  const {
+    register,
+    watch,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<Inputs>({
+    mode: 'all',
   });
+  const passwordValue = watch('password');
+  const password2Value = watch('password2');
+  const [notification, setNotification] = useState<NotificationType | null>(
+    null
+  );
 
   useEffect(() => {
     if (error) {
       const errorNotification: NotificationType = {
         type: NotificationTypeString.error,
         text: error,
-      }
+      };
 
       setNotification(() => ({ ...errorNotification }));
     }
-  }, [error])
+  }, [error]);
 
   useEffect(() => {
     if (notification) {
       setTimeout(() => {
         setNotification(() => null);
         dispatch(removeError());
-      }, 5000)
+      }, 5000);
     }
-  }, [error, notification])
-
-  const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault();
-  };
-
-  const registrHandler = async () => {
-    const nickname = formControls.nickname.value;
-    const email = formControls.email.value;
-    const password = formControls.password.value;
-
-    dispatch(signUpUser({nickname, email, password}))
-  }
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>, controlName: string) => {
-    const formControlsCopy: FormControlsSignUp = { ...formControls };
-    const control: FormControl = { ...formControlsCopy[controlName as keyof FormControlsSignUp] };
-    let isFormValidValue: boolean = true;
-    let password: string | null | undefined;
-
-    control.value = event.target.value;
-    password = formControlsCopy.password.value || null;
-    control.touched = true;
-
-    if (controlName === InputTypes.password && formControlsCopy.password2.touched) {
-      formControlsCopy.password2.valid = validateControl(
-        formControlsCopy.password2.value,
-        formControlsCopy.password2.validation,
-        control.value
-      );
-    }
-
-    control.valid = validateControl(control.value, control.validation, password);
-
-    formControlsCopy[controlName as keyof FormControlsSignUp] = control;
-
-    Object.keys(formControlsCopy).forEach((name: string) => {
-      isFormValidValue = formControlsCopy[name as keyof FormControlsSignUp].valid && isFormValidValue;
-    });
-
-    setIsFormValid(isFormValidValue);
-    setFormControls(prevState => ({...prevState, ...formControlsCopy}));
-  };
+  }, [error, notification]);
 
   const renderInputs = () => {
-    return Object.keys(formControls as FormControlsSignUp).map((controlName: string, i) => {
-      const control = {...formControls[controlName as keyof FormControlsSignUp]};
+    const signUpInputs = [
+      { ...inputs.nickname },
+      { ...inputs.email },
+      { ...inputs.password },
+      { ...inputs.password2 },
+    ];
 
+    signUpInputs[3].validation.validate = (value) =>
+      value === passwordValue || ErrorMessages.inputPassword2;
+
+    return signUpInputs.map((input) => {
       return (
         <Input
-          key={i}
-          type={control.type}
-          value={control.value}
-          valid={control.valid}
-          touched={control.touched}
-          label={control.label}
-          errorMessage={control.errorMessage}
-          shouldValidate={!!control.validation}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChangeHandler(event, controlName)}
+          key={input.label}
+          type={input.type}
+          value={input.value}
+          label={input.label}
+          labelName={input.labelName}
+          validation={input.validation}
+          register={register}
+          error={
+            password2Value === passwordValue && input.label === 'password2'
+              ? ''
+              : errors[input.label]?.message
+          }
         />
       );
     });
+  };
+
+  const onSubmit = (data: Inputs) => {
+    const email = data.email;
+    const password = data.password;
+    const nickname = data.nickname;
+
+    dispatch(signUpUser({ nickname, email, password }));
+    reset();
   };
 
   return (
     <>
       <div className={cls.join(' ')}>
         <div className={classes.SignUpContainer}>
-          <form onSubmit={submitHandler} className={classes.SignUpForm}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className={classes.SignUpForm}
+          >
             <h1>{TitleText.signUp}</h1>
             {renderInputs()}
             <div className={classes.SignUpFormBtns}>
-              <Button
-                type={ButtonTypes.success}
-                onClick={registrHandler}
-                disabled={!isFormValid}
-              >
+              <Button type={ButtonTypes.success} disabled={!isValid}>
                 {LinkText.signUp}
               </Button>
               <Link to={'/auth'}>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { themes } from '../../shared/constants';
 
 import { localStorageHandler } from '../../shared/localStorage';
 import { Tooltip } from '../../shared/text/text';
@@ -11,7 +12,7 @@ export const ThemeToggler = (props: {
   const [cls, setClasses] = useState([classes.TogglerIcon]);
 
   useEffect(() => {
-    const themeNew = localStorageHandler('getItem', 'theme') || 'Light';
+    const themeNew = localStorageHandler('getItem', 'theme') || themes.light;
 
     setTheme(themeNew);
   }, []);
@@ -22,14 +23,14 @@ export const ThemeToggler = (props: {
 
   const toggleTheme = () => {
     if (theme) {
-      if (theme === 'Light') {
-        setTheme('Dark');
-        props.themeToggler('Dark');
-        localStorageHandler('setItem', 'theme', 'Dark');
+      if (theme === themes.light) {
+        setTheme(themes.dark);
+        props.themeToggler(themes.dark);
+        localStorageHandler('setItem', 'theme', themes.dark);
       } else {
-        setTheme('Light');
-        props.themeToggler('Light');
-        localStorageHandler('setItem', 'theme', 'Light');
+        setTheme(themes.light);
+        props.themeToggler(themes.light);
+        localStorageHandler('setItem', 'theme', themes.light);
       }
     }
   };
