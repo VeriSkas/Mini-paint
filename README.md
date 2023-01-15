@@ -15,7 +15,7 @@
   />
 </h1>
 <h3 align="center">
-  React Typescript React-router-dom Canvas Firebase SCSS ESLint Prettier pre-commit hook
+  React Typescript React-router-dom React-hook-form React-redux reduxjs/toolkit Canvas Firebase SCSS ESLint Prettier pre-commit hook
 </h3>
 <h2> Task </h2>
 <a
@@ -69,6 +69,7 @@
     <li>папка components</li>
     <li>папка containers</li>
     <li>папка shared</li>
+    <li>папка store</li>
     <li>папка types</li>
     <li> Основные файлы tsx и scss</li>
   </ul>
