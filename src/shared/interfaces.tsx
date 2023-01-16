@@ -27,14 +27,18 @@ export interface InputProps {
   labelName: string;
   type: string;
   value: string;
-  validation: any;
+  validation: {
+    [key: string]:
+      | { value: number | boolean | RegExp, message: string }
+      | ((value: string) => boolean | string),
+  };
   register: UseFormRegister<Inputs>;
   error: string | undefined;
 }
 
 export interface ButtonProps {
   type?: string;
-  onClick?: any;
+  onClick?: () => void;
   disabled?: boolean;
   children?: string;
 }
@@ -50,7 +54,7 @@ export interface DrawBoardProps {
 }
 
 export interface SelectProps {
-  onChange: any;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   value: string | '';
   options: { value: string, id: string }[] | [];
   labelText: string;
@@ -99,7 +103,7 @@ export interface SuccessLoginResponse {
 }
 
 export interface ErrorResponse {
-  error: any;
+  error: { code: string };
 }
 
 export interface IInitialStateImages {

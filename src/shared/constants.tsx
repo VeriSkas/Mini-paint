@@ -19,7 +19,7 @@ export const themes: { [key: string]: string } = {
   dark: 'Dark',
 };
 
-export const canvasColor: string = 'rgb(223, 223, 223)';
+export const canvasColor = 'rgb(223, 223, 223)';
 
 export const linesWidth: { value: string, id: string }[] = [
   { value: '1px', id: '1px' },

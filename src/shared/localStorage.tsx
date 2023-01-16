@@ -1,4 +1,8 @@
-export function localStorageHandler(func: string, key?: string, body?: any) {
+export function localStorageHandler(
+  func: string,
+  key?: string,
+  body?: object | string
+) {
   switch (func) {
     case 'setItem':
       if (key && body) {

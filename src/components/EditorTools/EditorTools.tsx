@@ -48,7 +48,7 @@ export const EditorTools = (props: {onClick: (btn: string) => void}) => {
       <Select
           onChange={lineChange}
           value={activeLine}
-          type='little'
+          type="little"
           labelText={InputLabels.selectLine}
           options={lines.length ? lines : []}/>
     </div>

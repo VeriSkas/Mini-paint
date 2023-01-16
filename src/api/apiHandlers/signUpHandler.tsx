@@ -1,5 +1,6 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
+import { ErrorResponse, SuccessLoginResponse } from '../../shared/interfaces';
 import { auth } from '../apiConfig';
 import { createUser } from './dataBaseHandler';
 
@@ -21,8 +22,8 @@ export const signUpHandler = async (userData: {
 
     createUser(userInfo);
 
-    return { user };
+    return { user } as SuccessLoginResponse;
   } catch (error) {
-    return { error };
+    return { error } as ErrorResponse;
   }
 };

@@ -40,7 +40,6 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);

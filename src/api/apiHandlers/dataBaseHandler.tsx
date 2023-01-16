@@ -14,7 +14,7 @@ export const getUsers = async (): Promise<UserInfoInDB[]> => {
   const userRef = ref(database, 'users');
 
   return new Promise((resolve) => {
-    let users: UserInfoInDB[] = [];
+    const users: UserInfoInDB[] = [];
 
     onValue(
       userRef,
@@ -51,7 +51,7 @@ export const getImages = async (): Promise<ImageInDB[]> => {
   const imagesRef = ref(database, 'images');
 
   return new Promise((resolve) => {
-    let images: ImageInDB[] = [];
+    const images: ImageInDB[] = [];
 
     onValue(
       imagesRef,

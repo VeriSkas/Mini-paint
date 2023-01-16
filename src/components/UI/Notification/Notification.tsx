@@ -13,17 +13,17 @@ export const Notification = (props: NotificationType) => {
   const cls = [classes.Notification, classes[type]];
 
   useEffect(() => {
+    const createNotification = (notificationValue: NotificationType) => {
+      setNotification(notificationValue);
+      hideNotification();
+    };
+
     if (props.type && props.text) {
       const newNotification: NotificationType = { type, text };
 
       createNotification(newNotification);
     }
-  }, [props.type, props.text]);
-
-  const createNotification = (notificationValue: NotificationType) => {
-    setNotification(notificationValue);
-    hideNotification();
-  };
+  }, [props.type, props.text, type, text]);
 
   const hideNotification = () => {
     const timeout = setTimeout(() => {
