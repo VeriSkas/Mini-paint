@@ -1,6 +1,6 @@
 <h1 align="center">
   <img
-    src="@assets/icon.png"
+    src="./src/assets/icon.png"
     height="32"
   />
   <a
@@ -26,13 +26,13 @@
   Mini-paint task
 </a>
 <hr />
-<img src="@assets/readme/mini-paint1.png" alt="mini-paint img" height="450" />
+<img src="./src/assets/readme/mini-paint1.png" alt="mini-paint img" height="450" />
 <hr />
-<img src="@assets/readme/mini-paint2.png" alt="mini-paint img" height="450" />
+<img src="./src/assets/readme/mini-paint2.png" alt="mini-paint img" height="450" />
 <hr />
-<img src="@assets/readme/mini-paint3.png" alt="mini-paint img" height="450" />
+<img src="./src/assets/readme/mini-paint3.png" alt="mini-paint img" height="450" />
 <hr />
-<img src="@assets/readme/mini-paint4.png" alt="mini-paint img" height="450" />
+<img src="./src/assets/readme/mini-paint4.png" alt="mini-paint img" height="450" />
 <h2>How to run the app</h2>
 <p>Для того, чтобы запустить приложение, нужно:</p>
 <ol>
@@ -48,8 +48,8 @@
   </li>
 </ol>
 <h2>Database snapshot</h2>
-<img src="@assets/readme/dataBase1.png" alt="database img" height="450" />
-<img src="@assets/readme/dataBase2.png" alt="database img" height="450" />
+<img src="./src/assets/readme/dataBase1.png" alt="database img" height="450" />
+<img src="./src/assets/readme/dataBase2.png" alt="database img" height="450" />
 <h2>Folders structure</h2>
 <p>Приложение состоит следующих файлов и папок:</p>
 <ol>
