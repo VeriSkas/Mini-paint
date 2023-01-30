@@ -11,6 +11,7 @@ import { MainPage } from '@pages/MainPage/MainPage';
 import { SignUp } from '@pages/SignUp/SignUp';
 import { themes } from '@constants/constants';
 import { localStorageHandler } from '@utils/localStorage';
+import { paths } from '@constants/paths';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -19,15 +20,15 @@ function App() {
   const [currentTheme, setCurrentTheme] = useState('');
 
   const protectedRoutes = (
-    <Route path="/" element={<MainPage theme={currentTheme} />}>
+    <Route path={paths.home} element={<MainPage theme={currentTheme} />}>
       <Route index element={<Content />} />
-      <Route path="editor" element={<Editor />} />
+      <Route path={paths.editor} element={<Editor />} />
     </Route>
   );
   const unProtectedRoutes = (
     <>
-      <Route path="/auth" element={<Auth theme={currentTheme} />} />
-      <Route path="/sign-up" element={<SignUp theme={currentTheme} />} />
+      <Route path={paths.auth} element={<Auth theme={currentTheme} />} />
+      <Route path={paths.signUp} element={<SignUp theme={currentTheme} />} />
     </>
   );
 
@@ -60,9 +61,9 @@ function App() {
           path="*"
           element={
             isLoggedIn ? (
-              <Navigate to="/" replace />
+              <Navigate to={paths.home} replace />
             ) : (
-              <Navigate to="/auth" replace />
+              <Navigate to={paths.auth} replace />
             )
           }
         />

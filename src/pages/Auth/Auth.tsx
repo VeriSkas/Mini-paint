@@ -17,6 +17,7 @@ import {
 } from '@constants/text/text';
 import { removeError, signInUser } from '@store/userSlice';
 import classes from './Auth.module.scss';
+import { paths } from '@constants/paths';
 
 export const Auth = (props: { theme: string }) => {
   const { t } = useTranslation();
@@ -93,7 +94,7 @@ export const Auth = (props: { theme: string }) => {
               <Button type={ButtonTypes.success} disabled={!isValid}>
                 {t(LinkText.start)}
               </Button>
-              <Link to={'/sign-up'}>
+              <Link to={paths.signUp}>
                 <Button>{t(LinkText.signUp)}</Button>
               </Link>
             </div>

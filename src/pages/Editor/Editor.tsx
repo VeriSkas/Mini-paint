@@ -21,6 +21,7 @@ import {
 import { setActiveToolAction } from '@store/EditorSlice';
 import { addImage } from '@store/imageSlice';
 import classes from './Editor.module.scss';
+import { tools } from '@constants/tools';
 
 export const Editor = () => {
   const { t } = useTranslation();
@@ -107,18 +108,18 @@ export const Editor = () => {
   };
 
   const setActiveToolBtn = (btn: string) => {
-    if (btn === 'bin' && canvasContext) {
+    if (btn === tools.bin.value && canvasContext) {
       setMousePosition(null);
       clearBoardHandler(canvasContext);
       return;
     }
 
-    if (btn === 'save') {
+    if (btn === tools.save.value) {
       saveImg();
       return;
     }
 
-    if (btn === 'bin') {
+    if (btn === tools.bin.value) {
       return;
     }
 

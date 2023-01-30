@@ -5,6 +5,7 @@ import { ButtonTypes, LinkText, TitleText } from '@constants/text/text';
 import { logOutHandler } from '@queries/apiHandlers/logOutHandler';
 import { Button } from '../Button/Button';
 import classes from './NavBar.module.scss';
+import { paths } from '@constants/paths';
 
 export const NavBar = (props: { theme: string }) => {
   const { t } = useTranslation();
@@ -24,13 +25,13 @@ export const NavBar = (props: { theme: string }) => {
         <div className={classes.NavLinksBlock}>
           <div className={classes.NavLinks}>
             <NavLink
-              to={'/'}
+              to={paths.home}
               className={({ isActive }) => (isActive ? classes.ActiveLink : '')}
             >
               {t(LinkText.home)}
             </NavLink>
             <NavLink
-              to={'/editor'}
+              to={`${paths.home}${paths.editor}`}
               className={({ isActive }) => (isActive ? classes.ActiveLink : '')}
             >
               {t(LinkText.editor)}
