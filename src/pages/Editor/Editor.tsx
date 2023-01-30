@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { DrawBoard } from '@components/DrawBoard/DrawBoard';
 import { EditorTools } from '@components/EditorTools/EditorTools';
@@ -22,6 +23,7 @@ import { addImage } from '@store/imageSlice';
 import classes from './Editor.module.scss';
 
 export const Editor = () => {
+  const { t } = useTranslation();
   const [notification, setNotification] = useState<NotificationType | null>(
     null
   );
@@ -156,7 +158,7 @@ export const Editor = () => {
 
   return (
     <>
-      <h1 className={classes.Title}>{TitleText.editor}</h1>
+      <h1 className={classes.Title}>{t(TitleText.editor)}</h1>
       <div className={classes.EditorBody}>
         <EditorTools onClick={(btn: string) => setActiveToolBtn(btn)} />
         <DrawBoard

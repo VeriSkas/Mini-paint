@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { NotificationType } from '@interfaces/interfaces';
 import classes from './Notification.module.scss';
 
 export const Notification = (props: NotificationType) => {
+  const { t } = useTranslation();
   const [notification, setNotification] = useState<NotificationType | null>(
     null
   );
@@ -36,8 +38,8 @@ export const Notification = (props: NotificationType) => {
     if (notification) {
       return (
         <div className={cls}>
-          <h3>{type}</h3>
-          <p>{props.text}</p>
+          <h3>{t(type)}</h3>
+          <p>{t(props.text)}</p>
         </div>
       );
     }

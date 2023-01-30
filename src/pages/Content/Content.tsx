@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Select } from '@components/UI/Select/Select';
 import { useAppDispatch, useAppSelector } from '@hooks/hooks';
@@ -9,6 +10,7 @@ import { ImageBoard } from '../ImageBoard/ImageBoard';
 import classes from './Content.module.scss';
 
 export const Content = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [activeUserName, setActiveUserName] = useState<string>('');
   const options: OptionsType[] = useAppSelector(
@@ -28,7 +30,7 @@ export const Content = () => {
 
   return (
     <>
-      <h1 className={classes.Title}>{TitleText.images}</h1>
+      <h1 className={classes.Title}>{t(TitleText.images)}</h1>
       <div className={classes.ContentBody}>
         <Select
           onChange={onChangeHandler}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@components/UI/Button/Button';
 import { Input } from '@components/UI/Input/Input';
@@ -18,6 +19,7 @@ import { removeError, signInUser } from '@store/userSlice';
 import classes from './Auth.module.scss';
 
 export const Auth = (props: { theme: string }) => {
+  const { t } = useTranslation();
   const cls = `${classes.Auth} ${classes[props.theme]}`;
   const dispatch = useAppDispatch();
   const error = useAppSelector((state) => state.users.error);
@@ -85,14 +87,14 @@ export const Auth = (props: { theme: string }) => {
       <div className={cls}>
         <div className={classes.AuthContainer}>
           <form onSubmit={handleSubmit(onSubmit)} className={classes.AuthForm}>
-            <h1>{TitleText.auth}</h1>
+            <h1>{t(TitleText.auth)}</h1>
             {renderInputs()}
             <div className={classes.AuthFormBtns}>
               <Button type={ButtonTypes.success} disabled={!isValid}>
-                {LinkText.start}
+                {t(LinkText.start)}
               </Button>
               <Link to={'/sign-up'}>
-                <Button>{LinkText.signUp}</Button>
+                <Button>{t(LinkText.signUp)}</Button>
               </Link>
             </div>
           </form>
