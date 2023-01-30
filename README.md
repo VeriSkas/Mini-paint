@@ -1,6 +1,6 @@
 <h1 align="center">
   <img
-    src="./src/shared/img/icon.png"
+    src="@assets/icon.png"
     height="32"
   />
   <a
@@ -15,7 +15,8 @@
   />
 </h1>
 <h3 align="center">
-  React Typescript React-router-dom React-hook-form React-redux reduxjs/toolkit Canvas Firebase SCSS ESLint Prettier pre-commit hook
+  React Typescript React-router-dom React-hook-form React-redux reduxjs/toolkit Canvas Firebase SCSS ESLint Prettier pre-commit hook 
+  react-app-rewired alias i18next
 </h3>
 <h2> Task </h2>
 <a
@@ -25,13 +26,13 @@
   Mini-paint task
 </a>
 <hr />
-<img src="./src/shared/img/readme/mini-paint1.png" alt="mini-paint img" height="450" />
+<img src="@assets/readme/mini-paint1.png" alt="mini-paint img" height="450" />
 <hr />
-<img src="./src/shared/img/readme/mini-paint2.png" alt="mini-paint img" height="450" />
+<img src="@assets/readme/mini-paint2.png" alt="mini-paint img" height="450" />
 <hr />
-<img src="./src/shared/img/readme/mini-paint3.png" alt="mini-paint img" height="450" />
+<img src="@assets/readme/mini-paint3.png" alt="mini-paint img" height="450" />
 <hr />
-<img src="./src/shared/img/readme/mini-paint4.png" alt="mini-paint img" height="450" />
+<img src="@assets/readme/mini-paint4.png" alt="mini-paint img" height="450" />
 <h2>How to run the app</h2>
 <p>Для того, чтобы запустить приложение, нужно:</p>
 <ol>
@@ -47,8 +48,8 @@
   </li>
 </ol>
 <h2>Database snapshot</h2>
-<img src="./src/shared/img/readme/dataBase1.png" alt="database img" height="450" />
-<img src="./src/shared/img/readme/dataBase2.png" alt="database img" height="450" />
+<img src="@assets/readme/dataBase1.png" alt="database img" height="450" />
+<img src="@assets/readme/dataBase2.png" alt="database img" height="450" />
 <h2>Folders structure</h2>
 <p>Приложение состоит следующих файлов и папок:</p>
 <ol>
@@ -65,12 +66,15 @@
     содержатся:
   </li>
   <ul>
-    <li>папка api</li>
+    <li>папка assets</li>
     <li>папка components</li>
-    <li>папка containers</li>
-    <li>папка shared</li>
+    <li>папка hooks</li>
+    <li>папка interfaces</li>
+    <li>папка pages</li>
+    <li>папка queries</li>
     <li>папка store</li>
     <li>папка types</li>
+    <li>папка utils</li>
     <li> Основные файлы tsx и scss</li>
   </ul>
   <li>
