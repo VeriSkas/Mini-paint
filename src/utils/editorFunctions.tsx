@@ -1,5 +1,5 @@
-import { canvasColor, canvasSize } from '../constants/constants';
-import { MousePosition } from '../interfaces/interfaces';
+import { canvasColor, canvasSize } from '@constants/constants';
+import { MousePosition } from '@interfaces/interfaces';
 
 export const setColor = (
   color: string,

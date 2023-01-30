@@ -1,4 +1,4 @@
-import { OptionsType, SelectProps } from '../../../interfaces/interfaces';
+import { OptionsType, SelectProps } from '@interfaces/interfaces';
 import classes from './Select.module.scss';
 
 export const Select = (props: SelectProps) => {

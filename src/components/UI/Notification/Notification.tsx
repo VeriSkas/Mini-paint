@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { NotificationType } from '../../../interfaces/interfaces';
+import { NotificationType } from '@interfaces/interfaces';
 import classes from './Notification.module.scss';
 
 export const Notification = (props: NotificationType) => {

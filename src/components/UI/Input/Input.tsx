@@ -1,5 +1,5 @@
-import { InputProps } from '../../../interfaces/interfaces';
-import { InputTypes } from '../../../constants/text/text';
+import { InputProps } from '@interfaces/interfaces';
+import { InputTypes } from '@constants/text/text';
 import classes from './Input.module.scss';
 
 export const Input = (props: InputProps) => {

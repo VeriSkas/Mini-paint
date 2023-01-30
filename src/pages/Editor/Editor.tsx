@@ -1,27 +1,24 @@
 import { useEffect, useState } from 'react';
 
-import { DrawBoard } from '../../components/DrawBoard/DrawBoard';
-import { EditorTools } from '../../components/EditorTools/EditorTools';
-import { Notification } from '../../components/UI/Notification/Notification';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import {
-  clearBoardHandler,
-  drawDependOnBtn,
-} from '../../utils/editorFunctions';
+import { DrawBoard } from '@components/DrawBoard/DrawBoard';
+import { EditorTools } from '@components/EditorTools/EditorTools';
+import { Notification } from '@components/UI/Notification/Notification';
+import { useAppDispatch, useAppSelector } from '@hooks/hooks';
+import { clearBoardHandler, drawDependOnBtn } from '@utils/editorFunctions';
 import {
   ImageInDB,
   MousePosition,
   NotificationType,
-} from '../../interfaces/interfaces';
-import { localStorageHandler } from '../../utils/localStorage';
+} from '@interfaces/interfaces';
+import { localStorageHandler } from '@utils/localStorage';
 import {
   ErrorMessages,
   errorNotification,
   successNotification,
   TitleText,
-} from '../../constants/text/text';
-import { setActiveToolAction } from '../../store/EditorSlice';
-import { addImage } from '../../store/imageSlice';
+} from '@constants/text/text';
+import { setActiveToolAction } from '@store/EditorSlice';
+import { addImage } from '@store/imageSlice';
 import classes from './Editor.module.scss';
 
 export const Editor = () => {

@@ -1,15 +1,16 @@
-@import '../../constants/styles/color.scss';
+@import '@styles/color.scss';
 
-.SignUp {
+.Auth {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('../../assets/background1.png');
+  background-image: url('../../assets/background7.png');
   background-size: cover;
   background-color: $lightColor;
   background-repeat: no-repeat;
   background-position: center;
+  filter: invert(0);
 
   &.Dark {
     filter: invert(1);
@@ -23,7 +24,7 @@
     filter: invert(0);
   }
 
-  .SignUpContainer {
+  .AuthContainer {
     width: 100%;
     max-width: 600px;
     padding: 0 20px;
@@ -36,7 +37,7 @@
     text-shadow: 2px 2px $shadowColor;
   }
 
-  .SignUpForm {
+  .AuthForm {
     background: $lightGrey;
     opacity: .8;
     box-shadow: 2px 2px 2px $shadowColor;
@@ -47,7 +48,7 @@
       opacity: 1;
     }
 
-    .SignUpFormBtns {
+    .AuthFormBtns {
       text-align: center;
     }
   }

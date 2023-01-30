@@ -2,15 +2,15 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { auth } from './queries/apiConfig';
-import { ThemeToggler } from './components/ThemeToggler/ThemeToggler';
-import { Auth } from './containers/Auth/Auth';
-import { Content } from './containers/Content/Content';
-import { Editor } from './containers/Editor/Editor';
-import { MainPage } from './containers/MainPage/MainPage';
-import { SignUp } from './containers/SignUp/SignUp';
-import { themes } from './constants/constants';
-import { localStorageHandler } from './utils/localStorage';
+import { auth } from '@queries/apiConfig';
+import { ThemeToggler } from '@components/ThemeToggler/ThemeToggler';
+import { Auth } from '@pages/Auth/Auth';
+import { Content } from '@pages/Content/Content';
+import { Editor } from '@pages/Editor/Editor';
+import { MainPage } from '@pages/MainPage/MainPage';
+import { SignUp } from '@pages/SignUp/SignUp';
+import { themes } from '@constants/constants';
+import { localStorageHandler } from '@utils/localStorage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {

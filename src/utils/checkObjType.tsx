@@ -1,4 +1,4 @@
-import { ErrorResponse, SuccessLoginResponse } from '../interfaces/interfaces';
+import { ErrorResponse, SuccessLoginResponse } from '@interfaces/interfaces';
 
 export function instanceOfSuccessLoginResponse(object: object): object is SuccessLoginResponse {
   return 'user' in object;

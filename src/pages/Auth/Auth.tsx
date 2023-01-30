@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { Button } from '../../components/UI/Button/Button';
-import { Input } from '../../components/UI/Input/Input';
-import { Notification } from '../../components/UI/Notification/Notification';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { inputs } from '../../constants/constants';
-import { Inputs, NotificationType } from '../../interfaces/interfaces';
+import { Button } from '@components/UI/Button/Button';
+import { Input } from '@components/UI/Input/Input';
+import { Notification } from '@components/UI/Notification/Notification';
+import { useAppDispatch, useAppSelector } from '@hooks/hooks';
+import { inputs } from '@constants/constants';
+import { Inputs, NotificationType } from '@interfaces/interfaces';
 import {
   ButtonTypes,
   LinkText,
   NotificationTypeString,
   TitleText,
-} from '../../constants/text/text';
-import { removeError, signInUser } from '../../store/userSlice';
+} from '@constants/text/text';
+import { removeError, signInUser } from '@store/userSlice';
 import classes from './Auth.module.scss';
 
 export const Auth = (props: { theme: string }) => {

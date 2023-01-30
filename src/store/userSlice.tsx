@@ -4,12 +4,12 @@ import {
   ErrorResponse,
   IInitialStateUsers,
   SuccessLoginResponse,
-} from '../interfaces/interfaces';
-import { instanceOfErrorResponse } from '../utils/checkObjType';
-import { localStorageHandler } from '../utils/localStorage';
-import { getUsers } from '../queries/apiHandlers/dataBaseHandler';
-import { signUpHandler } from '../queries/apiHandlers/signUpHandler';
-import { authHandler } from '../queries/apiHandlers/authHandler';
+} from '@interfaces/interfaces';
+import { instanceOfErrorResponse } from '@utils/checkObjType';
+import { localStorageHandler } from '@utils/localStorage';
+import { getUsers } from '@queries/apiHandlers/dataBaseHandler';
+import { signUpHandler } from '@queries/apiHandlers/signUpHandler';
+import { authHandler } from '@queries/apiHandlers/authHandler';
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   const res = await getUsers();

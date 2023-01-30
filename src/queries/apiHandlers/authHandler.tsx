@@ -1,9 +1,6 @@
 import { signInWithEmailAndPassword, UserCredential } from 'firebase/auth';
 
-import {
-  ErrorResponse,
-  SuccessLoginResponse,
-} from '../../interfaces/interfaces';
+import { ErrorResponse, SuccessLoginResponse } from '@interfaces/interfaces';
 import { auth } from '../apiConfig';
 
 export const authHandler = async (user: {

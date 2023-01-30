@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
-import { ButtonTypes, LinkText, TitleText } from '../../../constants/text/text';
-import { logOutHandler } from '../../../queries/apiHandlers/logOutHandler';
+import { ButtonTypes, LinkText, TitleText } from '@constants/text/text';
+import { logOutHandler } from '@queries/apiHandlers/logOutHandler';
 import { Button } from '../Button/Button';
 import classes from './NavBar.module.scss';
 

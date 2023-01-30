@@ -1,4 +1,4 @@
-import { ButtonProps } from '../../../interfaces/interfaces';
+import { ButtonProps } from '@interfaces/interfaces';
 import classes from './Button.module.scss';
 
 export const Button = (props: ButtonProps) => {

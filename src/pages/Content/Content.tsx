@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { Select } from '../../components/UI/Select/Select';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { OptionsType } from '../../interfaces/interfaces';
-import { InputLabels, TitleText } from '../../constants/text/text';
-import { fetchUsers } from '../../store/userSlice';
+import { Select } from '@components/UI/Select/Select';
+import { useAppDispatch, useAppSelector } from '@hooks/hooks';
+import { OptionsType } from '@interfaces/interfaces';
+import { InputLabels, TitleText } from '@constants/text/text';
+import { fetchUsers } from '@store/userSlice';
 import { ImageBoard } from '../ImageBoard/ImageBoard';
 import classes from './Content.module.scss';
 

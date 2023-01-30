@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IInitialStateEditor } from '../interfaces/interfaces';
+
+import { IInitialStateEditor } from '@interfaces/interfaces';
 
 const initialState: IInitialStateEditor = {
   activeTool: 'pencil',
