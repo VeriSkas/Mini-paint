@@ -1,6 +1,6 @@
 import { off, onValue, push, ref, set } from 'firebase/database';
 
-import { ImageInDB, UserInfoInDB } from '../../shared/interfaces';
+import { ImageInDB, UserInfoInDB } from '../../interfaces/interfaces';
 import { database } from '../apiConfig';
 
 export const createUser = async (userInfo: UserInfoInDB) => {

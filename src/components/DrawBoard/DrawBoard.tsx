@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { canvasSize } from '../../shared/constants';
-import { DrawBoardProps, MousePosition } from '../../shared/interfaces';
+import { canvasSize } from '../../constants/constants';
+import { DrawBoardProps, MousePosition } from '../../interfaces/interfaces';
 import classes from './DrawBoard.module.scss';
 
 export const DrawBoard = (props: DrawBoardProps) => {

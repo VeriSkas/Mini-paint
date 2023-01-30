@@ -1,16 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authHandler } from '../api/apiHandlers/authHandler';
-
-import { getUsers } from '../api/apiHandlers/dataBaseHandler';
-import { signUpHandler } from '../api/apiHandlers/signUpHandler';
-import { instanceOfErrorResponse } from '../shared/checkObjType';
 
 import {
   ErrorResponse,
   IInitialStateUsers,
   SuccessLoginResponse,
-} from '../shared/interfaces';
-import { localStorageHandler } from '../shared/localStorage';
+} from '../interfaces/interfaces';
+import { instanceOfErrorResponse } from '../utils/checkObjType';
+import { localStorageHandler } from '../utils/localStorage';
+import { getUsers } from '../queries/apiHandlers/dataBaseHandler';
+import { signUpHandler } from '../queries/apiHandlers/signUpHandler';
+import { authHandler } from '../queries/apiHandlers/authHandler';
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   const res = await getUsers();

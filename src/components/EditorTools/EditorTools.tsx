@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import { useAppDispatch } from '../../hooks';
-import { linesWidth } from '../../shared/constants';
-import { Tools } from '../../shared/interfaces';
-import { InputLabels } from '../../shared/text/text';
-import { tools } from '../../shared/tools';
+import { linesWidth } from '../../constants/constants';
+import { Tools } from '../../interfaces/interfaces';
+import { InputLabels } from '../../constants/text/text';
+import { tools } from '../../constants/tools';
 import { changeColorAction, changeLineSizeAction } from '../../store/EditorSlice';
 import { EditorToolsBtn } from '../EditorToolsBtn/EditorToolsBtn';
 import { Select } from '../UI/Select/Select';

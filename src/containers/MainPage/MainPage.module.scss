@@ -1,4 +1,4 @@
-@import '../../shared/styles/color.scss';
+@import '../../constants/styles/color.scss';
 
 .MainPage {
   display: flex;
@@ -6,7 +6,7 @@
   justify-content:flex-start;
   align-items: center;
   height: 100vh;
-  background-image: url('../../shared/img/background8.png');
+  background-image: url('../../assets/background8.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-color: $lightColor;

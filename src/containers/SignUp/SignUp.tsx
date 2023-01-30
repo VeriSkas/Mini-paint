@@ -6,20 +6,20 @@ import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { Notification } from '../../components/UI/Notification/Notification';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { inputs } from '../../shared/constants';
-import { Inputs, NotificationType } from '../../shared/interfaces';
+import { inputs } from '../../constants/constants';
+import { Inputs, NotificationType } from '../../interfaces/interfaces';
 import {
   ButtonTypes,
   ErrorMessages,
   LinkText,
   NotificationTypeString,
   TitleText,
-} from '../../shared/text/text';
+} from '../../constants/text/text';
 import { removeError, signUpUser } from '../../store/userSlice';
 import classes from './SignUp.module.scss';
 
 export const SignUp = (props: { theme: string }) => {
-  const cls = [classes.SignUp, classes[props.theme]];
+  const cls = `${classes.SignUp} ${classes[props.theme]}`;
   const dispatch = useAppDispatch();
   const error = useAppSelector((state) => state.users.error);
   const {
@@ -99,7 +99,7 @@ export const SignUp = (props: { theme: string }) => {
 
   return (
     <>
-      <div className={cls.join(' ')}>
+      <div className={cls}>
         <div className={classes.SignUpContainer}>
           <form
             onSubmit={handleSubmit(onSubmit)}

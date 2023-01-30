@@ -6,19 +6,19 @@ import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { Notification } from '../../components/UI/Notification/Notification';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { inputs } from '../../shared/constants';
-import { Inputs, NotificationType } from '../../shared/interfaces';
+import { inputs } from '../../constants/constants';
+import { Inputs, NotificationType } from '../../interfaces/interfaces';
 import {
   ButtonTypes,
   LinkText,
   NotificationTypeString,
   TitleText,
-} from '../../shared/text/text';
+} from '../../constants/text/text';
 import { removeError, signInUser } from '../../store/userSlice';
 import classes from './Auth.module.scss';
 
 export const Auth = (props: { theme: string }) => {
-  const cls = [classes.Auth, classes[props.theme]];
+  const cls = `${classes.Auth} ${classes[props.theme]}`;
   const dispatch = useAppDispatch();
   const error = useAppSelector((state) => state.users.error);
   const [notification, setNotification] = useState<NotificationType | null>(
@@ -82,7 +82,7 @@ export const Auth = (props: { theme: string }) => {
 
   return (
     <>
-      <div className={cls.join(' ')}>
+      <div className={cls}>
         <div className={classes.AuthContainer}>
           <form onSubmit={handleSubmit(onSubmit)} className={classes.AuthForm}>
             <h1>{TitleText.auth}</h1>

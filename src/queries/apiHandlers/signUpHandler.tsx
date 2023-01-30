@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-import { ErrorResponse, SuccessLoginResponse } from '../../shared/interfaces';
+import { ErrorResponse, SuccessLoginResponse } from '../../interfaces/interfaces';
 import { auth } from '../apiConfig';
 import { createUser } from './dataBaseHandler';
 

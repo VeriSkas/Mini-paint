@@ -1,4 +1,4 @@
-import { IInput } from './interfaces';
+import { IInput } from '../interfaces/interfaces';
 import {
   ErrorMessages,
   InputLabels,

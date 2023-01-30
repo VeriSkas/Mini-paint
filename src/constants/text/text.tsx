@@ -1,4 +1,4 @@
-import { NotificationType } from '../interfaces';
+import { NotificationType } from '../../interfaces/interfaces';
 
 export const LinkText = {
   home: 'Home',

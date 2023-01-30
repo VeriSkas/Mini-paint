@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { Select } from '../../components/UI/Select/Select';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { OptionsType } from '../../shared/interfaces';
-import { InputLabels, TitleText } from '../../shared/text/text';
+import { OptionsType } from '../../interfaces/interfaces';
+import { InputLabels, TitleText } from '../../constants/text/text';
 import { fetchUsers } from '../../store/userSlice';
 import { ImageBoard } from '../ImageBoard/ImageBoard';
 import classes from './Content.module.scss';

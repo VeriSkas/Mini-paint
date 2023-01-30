@@ -1,19 +1,19 @@
 import { NavLink } from 'react-router-dom';
 
-import { logOutHandler } from '../../../api/apiHandlers/authHandler';
-import { ButtonTypes, LinkText, TitleText } from '../../../shared/text/text';
+import { ButtonTypes, LinkText, TitleText } from '../../../constants/text/text';
+import { logOutHandler } from '../../../queries/apiHandlers/logOutHandler';
 import { Button } from '../Button/Button';
 import classes from './NavBar.module.scss';
 
 export const NavBar = (props: { theme: string }) => {
-  const cls = [classes.NavBar, classes[props.theme]];
+  const cls = `${classes.NavBar} ${classes[props.theme]}`;
 
   const logOut = () => {
     logOutHandler();
   };
 
   return (
-    <div className={cls.join(' ')}>
+    <div className={cls}>
       <div className={classes.NavBarContainer}>
         <div className={classes.Title}>
           <div className={classes.Logo}></div>

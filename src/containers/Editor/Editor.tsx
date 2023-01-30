@@ -7,19 +7,19 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   clearBoardHandler,
   drawDependOnBtn,
-} from '../../shared/editorFunctions';
+} from '../../utils/editorFunctions';
 import {
   ImageInDB,
   MousePosition,
   NotificationType,
-} from '../../shared/interfaces';
-import { localStorageHandler } from '../../shared/localStorage';
+} from '../../interfaces/interfaces';
+import { localStorageHandler } from '../../utils/localStorage';
 import {
   ErrorMessages,
   errorNotification,
   successNotification,
   TitleText,
-} from '../../shared/text/text';
+} from '../../constants/text/text';
 import { setActiveToolAction } from '../../store/EditorSlice';
 import { addImage } from '../../store/imageSlice';
 import classes from './Editor.module.scss';

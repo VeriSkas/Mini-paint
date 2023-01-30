@@ -1,4 +1,4 @@
-@import '../../../shared/styles/color.scss';
+@import '../../../constants/styles/color.scss';
 
 .NavBar {
   display: flex;
@@ -27,7 +27,7 @@
       .Logo {
         width: 50px;
         height: 50px;
-        background: url('../../../shared/img/icon.png');
+        background: url('../../../assets/icon.png');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;

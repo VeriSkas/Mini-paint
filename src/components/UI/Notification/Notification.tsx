@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { NotificationType } from '../../../shared/interfaces';
+import { NotificationType } from '../../../interfaces/interfaces';
 import classes from './Notification.module.scss';
 
 export const Notification = (props: NotificationType) => {
@@ -10,7 +10,7 @@ export const Notification = (props: NotificationType) => {
 
   const type: string = props.type || 'Success';
   const text: string = props.text || 'Success';
-  const cls = [classes.Notification, classes[type]];
+  const cls = `${classes.Notification} ${classes[type]}`;
 
   useEffect(() => {
     const createNotification = (notificationValue: NotificationType) => {
@@ -35,7 +35,7 @@ export const Notification = (props: NotificationType) => {
   const renderNotification = () => {
     if (notification) {
       return (
-        <div className={cls.join(' ')}>
+        <div className={cls}>
           <h3>{type}</h3>
           <p>{props.text}</p>
         </div>

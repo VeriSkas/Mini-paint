@@ -1,11 +1,11 @@
-@import '../../shared/styles/color.scss';
+@import '../../constants/styles/color.scss';
 
 .SignUp {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('../../shared/img/background1.png');
+  background-image: url('../../assets/background1.png');
   background-size: cover;
   background-color: $lightColor;
   background-repeat: no-repeat;

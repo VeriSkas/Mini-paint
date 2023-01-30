@@ -1,11 +1,9 @@
-import {
-  signInWithEmailAndPassword,
-  signOut,
-  UserCredential,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword, UserCredential } from 'firebase/auth';
 
-import { ErrorResponse, SuccessLoginResponse } from '../../shared/interfaces';
-import { localStorageHandler } from '../../shared/localStorage';
+import {
+  ErrorResponse,
+  SuccessLoginResponse,
+} from '../../interfaces/interfaces';
 import { auth } from '../apiConfig';
 
 export const authHandler = async (user: {
@@ -20,9 +18,4 @@ export const authHandler = async (user: {
     .catch((error): ErrorResponse => ({ error }));
 
   return result;
-};
-
-export const logOutHandler = () => {
-  localStorageHandler('removeItem', 'uid');
-  signOut(auth);
 };

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { createImage, getImages } from '../api/apiHandlers/dataBaseHandler';
-import { IInitialStateImages, ImageInDB } from '../shared/interfaces';
+import { IInitialStateImages, ImageInDB } from '../interfaces/interfaces';
+import { createImage, getImages } from '../queries/apiHandlers/dataBaseHandler';
 
 export const fetchImages = createAsyncThunk('images/fetchImages', async () => {
   const res = await getImages();

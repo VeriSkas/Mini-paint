@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { Image } from '../../components/Image/Image';
 import { TextMessage } from '../../components/UI/TextMessage/TextMessage';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { ImageInDB } from '../../shared/interfaces';
-import { ContentText } from '../../shared/text/text';
+import { ImageInDB } from '../../interfaces/interfaces';
+import { ContentText } from '../../constants/text/text';
 import { fetchImages, filterImagesByUser } from '../../store/imageSlice';
 import classes from './ImageBoard.module.scss';
 

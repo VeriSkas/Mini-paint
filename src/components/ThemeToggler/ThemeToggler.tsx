@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { themes } from '../../shared/constants';
+import { themes } from '../../constants/constants';
 
-import { localStorageHandler } from '../../shared/localStorage';
-import { Tooltip } from '../../shared/text/text';
+import { localStorageHandler } from '../../utils/localStorage';
+import { Tooltip } from '../../constants/text/text';
 import classes from './ThemeToggler.module.scss';
 
 export const ThemeToggler = (props: {

@@ -1,12 +1,10 @@
-import { InputProps } from '../../../shared/interfaces';
-import { InputTypes } from '../../../shared/text/text';
+import { InputProps } from '../../../interfaces/interfaces';
+import { InputTypes } from '../../../constants/text/text';
 import classes from './Input.module.scss';
 
 export const Input = (props: InputProps) => {
-  const cls: string[] = [classes.Input];
-
   return (
-    <div className={cls.join(' ')}>
+    <div className={classes.Input}>
       <label htmlFor={props.labelName}>{props.labelName}</label>
       <input
         {...props.register(props.label, { ...props.validation })}

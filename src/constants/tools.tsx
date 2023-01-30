@@ -1,14 +1,14 @@
-import rect from '../shared/img/tools/rect.png';
-import circle from '../shared/img/tools/circle.png';
-import circlePart from '../shared/img/tools/circlePart.png';
-import line from '../shared/img/tools/line.png';
-import bin from '../shared/img/tools/bin.png';
-import save from '../shared/img/tools/save.png';
-import pencil from '../shared/img/tools/pencil.png';
-import eraser from '../shared/img/tools/eraser.png';
-import star from '../shared/img/tools/star.png';
-import pentagon from '../shared/img/tools/pentagon.png';
-import triangle from '../shared/img/tools/triangle.png';
+import rect from '../assets/tools/rect.png';
+import circle from '../assets/tools/circle.png';
+import circlePart from '../assets/tools/circlePart.png';
+import line from '../assets/tools/line.png';
+import bin from '../assets/tools/bin.png';
+import save from '../assets/tools/save.png';
+import pencil from '../assets/tools/pencil.png';
+import eraser from '../assets/tools/eraser.png';
+import star from '../assets/tools/star.png';
+import pentagon from '../assets/tools/pentagon.png';
+import triangle from '../assets/tools/triangle.png';
 
 export const tools = {
   rect: {
