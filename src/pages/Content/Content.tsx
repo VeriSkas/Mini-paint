@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/hooks';
 import { OptionsType } from '@interfaces/interfaces';
 import { InputLabels, TitleText } from '@constants/text/text';
 import { fetchUsers } from '@store/userSlice';
-import { ImageBoard } from '../ImageBoard/ImageBoard';
+import { ImageBoard } from '@components/ImageBoard/ImageBoard';
 import classes from './Content.module.scss';
 
 export const Content = () => {
