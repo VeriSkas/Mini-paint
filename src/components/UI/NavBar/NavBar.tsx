@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -7,9 +9,9 @@ import { Button } from '../Button/Button';
 import classes from './NavBar.module.scss';
 import { paths } from '@constants/paths';
 
-export const NavBar = (props: { theme: string }) => {
+export const NavBar: FC<{ theme: string }> = ({ theme }) => {
   const { t } = useTranslation();
-  const cls = `${classes.NavBar} ${classes[props.theme]}`;
+  const cls = `${classes.NavBar} ${classes[theme]}`;
 
   const logOut = () => {
     logOutHandler();

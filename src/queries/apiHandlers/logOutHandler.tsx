@@ -3,7 +3,7 @@ import { signOut } from 'firebase/auth';
 import { localStorageHandler } from '@utils/localStorage';
 import { auth } from '../apiConfig';
 
-export const logOutHandler = () => {
+export const logOutHandler = async (): Promise<void> => {
   localStorageHandler('removeItem', 'uid');
-  signOut(auth);
+  await signOut(auth);
 };

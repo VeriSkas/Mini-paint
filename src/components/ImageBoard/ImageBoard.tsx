@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, FC } from 'react';
 
 import { Image } from '@components/Image/Image';
 import { TextMessage } from '@components/UI/TextMessage/TextMessage';
@@ -8,17 +8,17 @@ import { ContentText } from '@constants/text/text';
 import { fetchImages, filterImagesByUser } from '@store/imageSlice';
 import classes from './ImageBoard.module.scss';
 
-export const ImageBoard = (props: { user: string }) => {
+export const ImageBoard: FC<{ user: string }> = ({ user }) => {
   const dispatch = useAppDispatch();
   const images = useAppSelector((state) => state.images.images);
 
-  useEffect((): void => {
-    if (props.user) {
-      dispatch(filterImagesByUser(props.user));
+  useEffect(() => {
+    if (user) {
+      dispatch(filterImagesByUser(user));
     } else {
       dispatch(fetchImages());
     }
-  }, [props.user]);
+  }, [user]);
 
   const renderImages = (images: ImageInDB[]) => {
     if (images.length) {

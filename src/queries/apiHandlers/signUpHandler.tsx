@@ -8,7 +8,7 @@ export const signUpHandler = async (userData: {
   email: string,
   nickname: string,
   password: string,
-}) => {
+}): Promise<SuccessLoginResponse | ErrorResponse> => {
   const { nickname, email, password } = userData;
 
   try {

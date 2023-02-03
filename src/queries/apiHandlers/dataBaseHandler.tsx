@@ -3,7 +3,7 @@ import { off, onValue, push, ref, set } from 'firebase/database';
 import { ImageInDB, UserInfoInDB } from '@interfaces/interfaces';
 import { database } from '../apiConfig';
 
-export const createUser = async (userInfo: UserInfoInDB) => {
+export const createUser = async (userInfo: UserInfoInDB): Promise<void> => {
   const userRef = ref(database, 'users');
   const newUserRef = push(userRef);
 
@@ -34,13 +34,13 @@ export const getUsers = async (): Promise<UserInfoInDB[]> => {
   });
 };
 
-export const unsubscribeUsers = async () => {
+export const unsubscribeUsers = async (): Promise<void> => {
   const userRef = ref(database, 'users');
 
   off(userRef);
 };
 
-export const createImage = async (image: ImageInDB) => {
+export const createImage = async (image: ImageInDB): Promise<void> => {
   const imagesRef = ref(database, 'images');
   const newImageRef = push(imagesRef);
 
@@ -71,7 +71,7 @@ export const getImages = async (): Promise<ImageInDB[]> => {
   });
 };
 
-export const unsubscribeImages = async () => {
+export const unsubscribeImages = async (): Promise<void> => {
   const imagesRef = ref(database, 'images');
 
   off(imagesRef);

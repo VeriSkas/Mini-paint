@@ -1,5 +1,5 @@
-import { User } from 'firebase/auth';
 import { UseFormRegister } from 'react-hook-form';
+import { User } from 'firebase/auth';
 
 import { store } from '@store/store';
 
@@ -60,6 +60,14 @@ export interface SelectProps {
   labelText: string;
   type?: string;
   emptyField?: boolean;
+}
+
+export interface FormProps {
+  link: { to: string, text: string };
+  submitBtnText: string;
+  inputs: IInput[];
+  onSubmitHandler: (data: Inputs) => void;
+  titleText: string;
 }
 
 export interface Tools {

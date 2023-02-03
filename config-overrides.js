@@ -9,9 +9,8 @@ module.exports = function override(config) {
     '@hooks': './src/hooks',
     '@queries': './src/queries',
     '@utils': './src/utils',
-    '@interfaces': './src/interfaces',
+    '@interfaces': './src/types/interfaces',
     '@store': './src/store',
-    '@types': './src/types',
     '@validation': './src/validation',
     '@styles': './src/constants/styles',
   })(config);

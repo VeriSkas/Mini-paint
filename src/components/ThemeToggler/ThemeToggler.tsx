@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { themes } from '@constants/constants';
+import { FC, useEffect, useState } from 'react';
 
+import { themes } from '@constants/constants';
 import { localStorageHandler } from '@utils/localStorage';
 import { Tooltip } from '@constants/text/text';
 import classes from './ThemeToggler.module.scss';
 
-export const ThemeToggler = (props: {
-  themeToggler: (theme: string) => void,
+export const ThemeToggler: FC<{ themeToggler: (theme: string) => void }> = ({
+  themeToggler,
 }) => {
   const [theme, setTheme] = useState('');
   const [cls, setClasses] = useState([classes.TogglerIcon]);
@@ -25,11 +25,11 @@ export const ThemeToggler = (props: {
     if (theme) {
       if (theme === themes.light) {
         setTheme(themes.dark);
-        props.themeToggler(themes.dark);
+        themeToggler(themes.dark);
         localStorageHandler('setItem', 'theme', themes.dark);
       } else {
         setTheme(themes.light);
-        props.themeToggler(themes.light);
+        themeToggler(themes.light);
         localStorageHandler('setItem', 'theme', themes.light);
       }
     }

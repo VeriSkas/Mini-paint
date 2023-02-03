@@ -18,7 +18,7 @@ import {
   successNotification,
   TitleText,
 } from '@constants/text/text';
-import { setActiveToolAction } from '@store/EditorSlice';
+import { setActiveToolAction } from '@store/editorSlice';
 import { addImage } from '@store/imageSlice';
 import classes from './Editor.module.scss';
 import { tools } from '@constants/tools';

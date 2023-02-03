@@ -20,7 +20,7 @@ export const Content = () => {
     value: user.nickname,
   }));
 
-  useEffect((): void => {
+  useEffect(() => {
     dispatch(fetchUsers());
   }, []);
 

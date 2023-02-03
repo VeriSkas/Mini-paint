@@ -1,9 +1,11 @@
+import { FC } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
 import { OptionsType, SelectProps } from '@interfaces/interfaces';
 import classes from './Select.module.scss';
 
-export const Select = (props: SelectProps) => {
+export const Select: FC<SelectProps> = (props) => {
   const { t } = useTranslation();
   const cls = [classes.Select, props.type ? classes[props.type] : ''];
 

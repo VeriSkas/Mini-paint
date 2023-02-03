@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 
 import { useAppDispatch } from '@hooks/hooks';
 import { linesWidth } from '@constants/constants';
 import { Tools } from '@interfaces/interfaces';
 import { InputLabels } from '@constants/text/text';
 import { tools } from '@constants/tools';
-import { changeColorAction, changeLineSizeAction } from '@store/EditorSlice';
+import { changeColorAction, changeLineSizeAction } from '@store/editorSlice';
 import { EditorToolsBtn } from '../EditorToolsBtn/EditorToolsBtn';
 import { Select } from '../UI/Select/Select';
 import classes from './EditorTools.module.scss';
 
-export const EditorTools = (props: {onClick: (btn: string) => void}) => {
+export const EditorTools: FC<{onClick: (btn: string) => void}> = ({onClick}) => {
   const toolsParams: Tools = tools;
   const lines = linesWidth;
   const dispatch = useAppDispatch();
@@ -33,7 +33,7 @@ export const EditorTools = (props: {onClick: (btn: string) => void}) => {
         key={key}
         img={toolsParams[key].path}
         value={toolsParams[key].value}
-        onClick={(btn: string) => props.onClick(btn)}
+        onClick={(btn: string) => onClick(btn)}
       />
     })
   }

@@ -1,7 +1,9 @@
+import { FC } from 'react';
+
 import { ButtonProps } from '@interfaces/interfaces';
 import classes from './Button.module.scss';
 
-export const Button = (props: ButtonProps) => {
+export const Button: FC<ButtonProps> = (props) => {
   const cls = [classes.Button, classes[props.type || '']];
   const clickedBtn = props.onClick ? true : false;
 

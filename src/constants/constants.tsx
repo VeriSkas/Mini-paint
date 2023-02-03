@@ -1,9 +1,11 @@
 import { IInput } from '@interfaces/interfaces';
+import { paths } from './paths';
 import {
   ErrorMessages,
   InputLabels,
   InputLabelsName,
   InputTypes,
+  LinkText,
 } from './text/text';
 
 export const screenWidth = window.innerWidth;
@@ -82,4 +84,9 @@ export const inputs: { [key: string]: IInput } = {
       maxLength: { value: 32, message: ErrorMessages.inputMaxLength(32) },
     },
   },
+};
+
+export const LinkBtn = {
+  authPage: { to: paths.signUp, text: LinkText.signUp },
+  signUpPage: { to: paths.auth, text: LinkText.return },
 };

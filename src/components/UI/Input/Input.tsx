@@ -1,10 +1,12 @@
+import { FC } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
 import { InputProps } from '@interfaces/interfaces';
 import { InputTypes } from '@constants/text/text';
 import classes from './Input.module.scss';
 
-export const Input = (props: InputProps) => {
+export const Input: FC<InputProps> = (props) => {
   const { t } = useTranslation();
 
   return (

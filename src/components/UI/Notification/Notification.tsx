@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { NotificationType } from '@interfaces/interfaces';
 import classes from './Notification.module.scss';
 
-export const Notification = (props: NotificationType) => {
+export const Notification: FC<NotificationType> = ({
+  type: propType,
+  text: propText,
+}) => {
   const { t } = useTranslation();
   const [notification, setNotification] = useState<NotificationType | null>(
     null
   );
 
-  const type: string = props.type || 'Success';
-  const text: string = props.text || 'Success';
+  const type: string = propType || 'Success';
+  const text: string = propText || 'Success';
   const cls = `${classes.Notification} ${classes[type]}`;
 
   useEffect(() => {
@@ -20,12 +23,12 @@ export const Notification = (props: NotificationType) => {
       hideNotification();
     };
 
-    if (props.type && props.text) {
+    if (propType && propText) {
       const newNotification: NotificationType = { type, text };
 
       createNotification(newNotification);
     }
-  }, [props.type, props.text, type, text]);
+  }, [propType, propText, type, text]);
 
   const hideNotification = () => {
     const timeout = setTimeout(() => {
@@ -39,7 +42,7 @@ export const Notification = (props: NotificationType) => {
       return (
         <div className={cls}>
           <h3>{t(type)}</h3>
-          <p>{t(props.text)}</p>
+          <p>{t(propText)}</p>
         </div>
       );
     }

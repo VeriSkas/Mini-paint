@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
 import { canvasSize } from '@constants/constants';
-import { DrawBoardProps, MousePosition } from '@interfaces/interfaces';
 import classes from './DrawBoard.module.scss';
+import { DrawBoardProps, MousePosition } from '@interfaces/interfaces';
 
-export const DrawBoard = (props: DrawBoardProps) => {
+export const DrawBoard: FC<DrawBoardProps> = (props) => {
   const [mouseDown, setMouseDown] = useState(false);
   const [mousePosition, setMousePosition] = useState<MousePosition | null>(
     null
