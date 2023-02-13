@@ -1,0 +1,88 @@
+@import '@styles/color.scss';
+
+.NavBar {
+  display: flex;
+  justify-content: center;
+  max-height: 60px;
+  height: 100%;
+  width: 100vw;
+  background: rgba($color: $black, $alpha: .7);
+
+  &.Dark {
+    filter: invert(1);
+  }
+
+  .NavBarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    width: 100%;
+
+    .Title {
+      display: flex;
+      margin-left: 20px;
+      width: 40%;
+
+      .Logo {
+        width: 50px;
+        height: 50px;
+        background: url('../../../assets/icon.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      h1 {
+        display: flex;
+        align-items: center;
+        font-size: calc(18px + 12 * (100vw / 1280));
+        color: $lightColor;
+        text-shadow: 4px 3px 5px $purpleLight;
+        margin-left: 10px;
+      }
+    }
+
+    .NavLinksBlock {
+      display: flex;
+      width: 30%;
+
+      .NavLinks {
+        width: 100%;
+        max-width: 300px;
+        min-width: 110px;
+        display: flex;
+        justify-content: space-evenly;
+
+        a {
+          color: $lightColor;
+          text-shadow: 4px 3px 5px $purpleLight;
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          &.ActiveLink {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .Logout {
+      display: flex;
+      justify-content: flex-end;
+      width: 30%;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .Title {
+    margin-left: 5px !important;
+  }
+
+  .Logo {
+    display: none;
+  }
+}

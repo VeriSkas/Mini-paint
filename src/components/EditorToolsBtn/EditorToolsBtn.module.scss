@@ -1,0 +1,34 @@
+@import '@styles/color.scss';
+
+.EditorToolsBtn {
+  width: 45px;
+  height: 45px;
+  padding: 5px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  margin: 5px;
+  background: #b3b3b3;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 2px 2px 2px $shadowColor;
+  }
+
+  &:active {
+    box-shadow: inset 2px 2px 2px $shadowColor;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .EditorToolsBtn {
+    width: 25px;
+    height: 25px;
+  }
+}

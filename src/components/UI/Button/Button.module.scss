@@ -1,0 +1,52 @@
+@import '@styles/color.scss';
+
+.Button {
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px $shadowColor;
+  color: $lightColor;
+  font-size: calc(10px + 3 * (100vw / 1280));
+  font-weight: 600;
+  text-transform: uppercase;
+  background: $blue;
+  cursor: pointer;
+
+  &:active {
+    box-shadow: inset 2px 2px 1px $shadowColor;
+  }
+
+  &.error {
+    background: $red;
+  }
+
+  &.success {
+    background: $green;
+  }
+
+  &.standard {
+    background: $purpleLight;
+  }
+
+  &:disabled {
+    background: $disabledBtn;
+    color: $textDark;
+    cursor: not-allowed;
+
+    a {
+      color: $textDark;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $lightColor;
+  }
+}
+
+@media (max-width: 650px) {
+  .Button {
+    padding: 10px 5px;
+  }
+}

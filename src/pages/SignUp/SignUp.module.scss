@@ -1,0 +1,31 @@
+@import '@styles/color.scss';
+
+.SignUp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../../assets/background1.png');
+  background-size: cover;
+  background-color: $lightColor;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &.Dark {
+    filter: invert(1);
+
+    label, span {
+      filter: invert(1);
+    }
+  }
+
+  &.Light {
+    filter: invert(0);
+  }
+
+  .SignUpContainer {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
+  }
+}

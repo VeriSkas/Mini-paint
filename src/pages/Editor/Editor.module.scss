@@ -1,0 +1,25 @@
+@import '@styles/color.scss';
+
+.Title {
+  font-size: calc(20px + 12 * (100vw / 1280));
+  color: $lightColor;
+  text-shadow: 4px 3px 5px $purpleLight;
+  margin: 20px 0;
+}
+
+.EditorBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  & > div {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .Title {
+    margin: 10px 0;
+  }
+}
