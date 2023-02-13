@@ -6,18 +6,25 @@ import { InputProps } from '@interfaces/interfaces';
 import { InputTypes } from '@constants/text/text';
 import classes from './Input.module.scss';
 
-export const Input: FC<InputProps> = (props) => {
+export const Input: FC<InputProps> = ({
+  label,
+  labelName,
+  type,
+  validation,
+  register,
+  error,
+}) => {
   const { t } = useTranslation();
 
   return (
     <div className={classes.Input}>
-      <label htmlFor={props.labelName}>{t(props.labelName)}</label>
+      <label htmlFor={labelName}>{t(labelName)}</label>
       <input
-        {...props.register(props.label, { ...props.validation })}
-        type={props.type || InputTypes.text}
-        id={props.labelName}
+        {...register(label, { ...validation })}
+        type={type || InputTypes.text}
+        id={labelName}
       />
-      {props.error && <span>{t(props.error)}</span>}
+      {error && <span>{t(error)}</span>}
     </div>
   );
 };

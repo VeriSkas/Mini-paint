@@ -4,8 +4,13 @@ import { canvasSize } from '@constants/constants';
 import classes from './DrawBoard.module.scss';
 import { DrawBoardProps, MousePosition } from '@interfaces/interfaces';
 
-export const DrawBoard: FC<DrawBoardProps> = (props) => {
-  const [mouseDown, setMouseDown] = useState(false);
+export const DrawBoard: FC<DrawBoardProps> = ({
+  mouseUp,
+  mouseDown,
+  draw,
+  takeCanvasData,
+}) => {
+  const [mouseDownPosition, setMouseDownPosition] = useState(false);
   const [mousePosition, setMousePosition] = useState<MousePosition | null>(
     null
   );
@@ -21,17 +26,17 @@ export const DrawBoard: FC<DrawBoardProps> = (props) => {
 
     if (context == null) return;
 
-    props.takeCanvasData(canvas);
-  }, [context, props.takeCanvasData]);
+    takeCanvasData(canvas);
+  }, [context, takeCanvasData]);
 
   useEffect(() => {
     if (context && mousePosition) {
-      props.draw(context, mousePosition);
+      draw(context, mousePosition);
     }
   }, [context, mousePosition]);
 
   const onMouseMove = (event: React.MouseEvent) => {
-    if (mouseDown) {
+    if (mouseDownPosition) {
       const newPosition = {
         x: event.nativeEvent.offsetX,
         y: event.nativeEvent.offsetY,
@@ -47,8 +52,8 @@ export const DrawBoard: FC<DrawBoardProps> = (props) => {
       y: event.nativeEvent.offsetY,
     };
 
-    props.mouseDown(mouseDownPosition);
-    setMouseDown(true);
+    mouseDown(mouseDownPosition);
+    setMouseDownPosition(true);
   };
 
   const onMouseUp = (event: React.MouseEvent) => {
@@ -57,8 +62,8 @@ export const DrawBoard: FC<DrawBoardProps> = (props) => {
       y: event.nativeEvent.offsetY,
     };
 
-    props.mouseUp(mouseUpPosition);
-    setMouseDown(false);
+    mouseUp(mouseUpPosition);
+    setMouseDownPosition(false);
     setMousePosition(null);
   };
 

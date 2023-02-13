@@ -3,23 +3,28 @@ import { FC } from 'react';
 import { ButtonProps } from '@interfaces/interfaces';
 import classes from './Button.module.scss';
 
-export const Button: FC<ButtonProps> = (props) => {
-  const cls = [classes.Button, classes[props.type || '']];
-  const clickedBtn = props.onClick ? true : false;
+export const Button: FC<ButtonProps> = ({
+  type,
+  onClick,
+  disabled,
+  children,
+}) => {
+  const cls = [classes.Button, classes[type || '']];
+  const clickedBtn = onClick ? true : false;
 
   return (
     <>
       {clickedBtn ? (
         <button
           className={cls.join(' ')}
-          onClick={() => props.onClick?.()}
-          disabled={props.disabled}
+          onClick={() => onClick?.()}
+          disabled={disabled}
         >
-          {props.children}
+          {children}
         </button>
       ) : (
-        <button className={cls.join(' ')} disabled={props.disabled}>
-          {props.children}
+        <button className={cls.join(' ')} disabled={disabled}>
+          {children}
         </button>
       )}
     </>
