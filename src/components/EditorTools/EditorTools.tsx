@@ -5,7 +5,7 @@ import { linesWidth } from '@constants/constants';
 import { Tools } from '@interfaces/interfaces';
 import { InputLabels } from '@constants/text/text';
 import { tools } from '@constants/tools';
-import { changeColorAction, changeLineSizeAction } from '@store/editorSlice';
+import { changeColorAction, changeLineSizeAction } from '@store/EditorSlice';
 import { EditorToolsBtn } from '../EditorToolsBtn/EditorToolsBtn';
 import { Select } from '../UI/Select/Select';
 import classes from './EditorTools.module.scss';
