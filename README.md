@@ -35,6 +35,12 @@
 <img src="./src/assets/readme/mini-paint4.png" alt="mini-paint img" height="450" />
 <h2>How to run the app</h2>
 <p>Для того, чтобы запустить приложение, нужно:</p>
+<a
+  href="https://veriskas.github.io/Mini-paint/"
+  target="_blank"
+>
+  Открыть ссылку с задеплоинной версией Mini-paint
+</a>
 <ol>
   <li>Запустить Вашу IDE.</li>
   <li>Открыть нужную папку с приложением MY-APP</li>
