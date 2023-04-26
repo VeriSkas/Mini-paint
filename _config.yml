@@ -1,0 +1,10 @@
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "build"
+    values:
+      index: "index.html"
