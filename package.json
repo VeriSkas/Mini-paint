@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://veriskas.github.io/Mini-paint",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/user-event": "^13.5.0",
@@ -30,7 +31,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint",
     "prepare": "husky install",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "jest": {
     "moduleNameMapper": {
@@ -77,6 +80,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^5.0.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.1.0",
     "pretty-quick": "^3.1.3",

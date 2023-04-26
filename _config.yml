@@ -1,5 +1,0 @@
-defaults:
-  - scope:
-      path: "build"
-    values:
-      index: "index.html"
